@@ -1,7 +1,7 @@
 from threading import Thread
 from datetime import date
 from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.jobstores.memory import MemoryJobStore
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from urllib import request
 import pytz
 
@@ -11,18 +11,16 @@ def _get_url(sid, url):
     url = url+parameter_str
     req = request.Request(url)
     page = request.urlopen(req).read()
-    page = page.decode('utf-8')
-    #print(page)
 
 
 class _Scheduler:
     def __init__(self):
-        self.job_store = MemoryJobStore()
-        jobs_tores = {
-            'default': self.job_store,
+        job_store = SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
+        jobs_stores = {
+            'default': job_store,
         }
         tz = pytz.timezone('Asia/Shanghai')
-        self._scheduler = BlockingScheduler(jobstores=jobs_tores, time_zone=tz)
+        self._scheduler = BlockingScheduler(jobstores=jobs_stores, time_zone=tz)
         thread = Thread(target=self._scheduler.start)
         thread.start()
 
@@ -39,12 +37,20 @@ class _Scheduler:
         return self._scheduler.get_job(job_id=sid)
 
     def get_jobs(self):
-        return self._scheduler.get_job()
+        return self._scheduler.get_jobs()
+
+    def pause_job(self, sid):
+        self._scheduler.pause_job(job_id=str(sid))
+
+    def resume_job(self, sid):
+        self._scheduler.resume_job(job_id=str(sid))
 
 
 Scheduler = _Scheduler()
 
 if __name__ == '__main__':
     url_1 = "http://192.168.0.157:3502/bond_v2/bond/PyBondShanghaiExchangeBaseInfo21?sid=402&version={version}"
-    _get_url(url_1)
+    Scheduler.add_job_url(sid=1, url=url_1, cron_str='10 22 * * *')
+    #Scheduler.remove_job(sid=1)
+    print(Scheduler.get_job(sid=1))
 

@@ -21,49 +21,57 @@ class RevExecPlan(View):
     def post(self, request):
         print(request.post)
         if 'add_list' in request.post:
+            err_string = ''
             add_list = json.loads(request.post['add_list'])
             for program in add_list:
                 cron = program['crontab']
                 api = program['path']
                 sid = program['sid']
-                Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+                try:
+                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+                except Exception as e:
+                    err_string = err_string+str(e)
+                if err_string:
+                    return HttpResponse(err_string)
+                return HttpResponse('add success')
+
+        if 'add_list' in request.post:
+            err_string = ''
+            add_list = json.loads(request.post['add_list'])
+            for program in add_list:
+                cron = program['crontab']
+                api = program['path']
+                sid = program['sid']
+                try:
+                    Scheduler.remove_job(sid=sid)
+                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+                except Exception as e:
+                    err_string = err_string+str(e)
+                if err_string:
+                    return HttpResponse(err_string)
+                return HttpResponse('modify success')
+
         if 'del_list' in request.post:
             del_list = json.loads(request.post['del_list'])
+            err_string = ''
             for sid in del_list:
-                Scheduler.remove_job(sid=sid)
-
+                try:
+                    Scheduler.remove_job(sid=sid)
+                except Exception as e:
+                    err_string = err_string+str(e)
+            if err_string:
+                return HttpResponse(err_string)
+            return HttpResponse('del success')
         else:
             return HttpResponse('bad info!')
 
 
-
-
-class GetCommand:
-
-    def __init__(self, program_info):
-        self.program_info = program_info
-        self.sid = program_info['sid']
-        self.program = program_info['path']
-        self.run_type = program_info['run_type']
-
-    def __call__(self, *args, **kwargs):
-        if self.run_type == 1:
-            return self._exec_program()
+class GetExecPlan(View):
+    def get(self, request, sid=None):
+        if sid is None:
+            return HttpResponse(Scheduler.get_jobs())
         else:
-            return self._url_program()
-
-    def _url_program(self):
-        parameter_str = "?sid={sid}&version={date}"
-        get_url = "curl  " + self.program + parameter_str
-        return get_url
-
-    def _exec_program(self):
-        if os.path.splitext(self.program)[1] == '.jar':
-            get_cmd = "java  -jar" + self.program
-        elif os.path.splitext(self.program)[1] == '.sh':
-            get_cmd = "sh " + self.program
-        elif os.path.splitext(self.program)[1] == '.py':
-            get_cmd = "python -u " + self.program
-        else:
-            get_cmd = "%{program} 程序类型仅支持 shell(.sh) python(.py) java(.jar)".format(program=self.program)
-        return get_cmd
+            try:
+                return HttpResponse(Scheduler.get_job(sid=sid))
+            except Exception as e:
+                return HttpResponse(str(e))

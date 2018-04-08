@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from slave_server.views import HoldConnection, RevExecPlan
+from slave_server.views import HoldConnection, RevExecPlan, GetExecPlan
 
 urlpatterns = [
     path('hello/', HoldConnection.as_view()),
-    path('execution_map/', RevExecPlan.as_view())
+    path('execution_cron/', RevExecPlan.as_view()),
+    path('get_plan/<sid>/', GetExecPlan.as_view()),
+    path('get_plan/', GetExecPlan.as_view())
 ]
 
