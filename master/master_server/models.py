@@ -62,7 +62,7 @@ class PyScriptBaseInfoV2(models.Model):
     run_type = ((0, '调用api'),
                 (1, '调用程序'))
 
-    program_type = ((0, '抓取'),
+    program_type = ((0, '计划任务'),
                     (1, '计算'),
                     (2, '其他'))
 
