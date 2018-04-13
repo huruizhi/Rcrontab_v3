@@ -18,7 +18,7 @@ from slave_server.views import HoldConnection, RevExecPlan, GetExecPlan
 
 urlpatterns = [
     path('hello/', HoldConnection.as_view()),
-    path('execution_cron/', RevExecPlan.as_view()),
+    path('set_plan/<action>/', RevExecPlan.as_view()),
     path('get_plan/<sid>/', GetExecPlan.as_view()),
     path('get_plan/', GetExecPlan.as_view())
 ]

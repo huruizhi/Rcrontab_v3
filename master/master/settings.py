@@ -73,16 +73,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'master.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'py_crontab_v3',
+        'NAME': 'py_crontab',
         'USER': 'pycf',
         'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.151',
+        'HOST': '192.168.0.153',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
     }

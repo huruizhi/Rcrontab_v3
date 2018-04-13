@@ -99,8 +99,7 @@ class PyScriptOwnerListV2(models.Model):
 
 
 class ResultLog(models.Model):
-    event_type_list = ((0, '执行调度'), (1, '开始执行'), (2, '正常结束'), (3, '异常终止'),
-                       (4, '质控正常'), (5, '质控异常'))
+    event_type_list = ((0, '执行调度'), (1, '开始执行'), (2, '正常结束'), (3, '异常终止'),)
     script = models.ForeignKey('PyScriptBaseInfoV2', on_delete=models.CASCADE,
                                related_name='result', db_column='sid', null=True)
     version = models.DateField()
@@ -111,7 +110,7 @@ class ResultLog(models.Model):
     flag = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.script, self.version
+        return "script:{script}, version:{version}".format(script=self.script, version=self.version)
 
     class Meta:
         db_table = 'py_script_result_log'

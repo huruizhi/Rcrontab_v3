@@ -18,46 +18,40 @@ class HoldConnection(View):
 
 class RevExecPlan(View):
 
-    def post(self, request):
-        print(request.post)
-        if 'add_list' in request.post:
+    def post(self, request, action):
+        if action == 'add':
             err_string = ''
-            add_list = json.loads(request.post['add_list'])
-            for program in add_list:
-                cron = program['crontab']
-                api = program['path']
-                sid = program['sid']
-                try:
-                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
-                except Exception as e:
-                    err_string = err_string+str(e)
-                if err_string:
-                    return HttpResponse(err_string)
-                return HttpResponse('add success')
+            cron = request.POST['cron']
+            api = request.POST['api']
+            sid = request.POST['sid']
+            try:
+                Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+            except Exception as e:
+                err_string = err_string+str(e)
+            if err_string:
+                return HttpResponse(err_string)
+            return HttpResponse('add success')
 
-        if 'add_list' in request.post:
+        if action == 'mod':
             err_string = ''
-            add_list = json.loads(request.post['add_list'])
-            for program in add_list:
-                cron = program['crontab']
-                api = program['path']
-                sid = program['sid']
-                try:
-                    Scheduler.remove_job(sid=sid)
-                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
-                except Exception as e:
-                    err_string = err_string+str(e)
-                if err_string:
-                    return HttpResponse(err_string)
-                return HttpResponse('modify success')
+            cron = request.POST['cron']
+            api = request.POST['api']
+            sid = request.POST['sid']
+            try:
+                Scheduler.remove_job(sid=sid)
+                Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+            except Exception as e:
+                err_string = err_string+str(e)
+            if err_string:
+                return HttpResponse(err_string)
+            return HttpResponse('modify success')
 
-        if 'del_list' in request.post:
-            del_list = json.loads(request.post['del_list'])
+        if action == 'del':
             err_string = ''
-            for sid in del_list:
-                try:
-                    Scheduler.remove_job(sid=sid)
-                except Exception as e:
+            try:
+                sid = request.POST['sid']
+                Scheduler.remove_job(sid=sid)
+            except Exception as e:
                     err_string = err_string+str(e)
             if err_string:
                 return HttpResponse(err_string)
