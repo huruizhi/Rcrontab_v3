@@ -1,6 +1,8 @@
 from master_server.models import PyScriptBaseInfoV2, TablesInfo, ServerInfo, Path
 from master_server.cron_obj_lib.cron_obj import CronObj
+from threading import Thread
 import json
+from time import sleep
 import os
 
 
@@ -16,12 +18,14 @@ class MaintainProgram:
 
         for sid in self.programs_info:
             self.cron_program_obj_dic[sid] = CronObj(**self.programs_info[sid])
+        thread = Thread(target=self._loop_check_table)
+        thread.start()
 
     # 从mysql数据库读取 所有程序 计划任务信息
     @staticmethod
     def _get_plan():
         programs_info_new = dict()
-        programs = PyScriptBaseInfoV2.objects.filter(program_type=0)
+        programs = PyScriptBaseInfoV2.objects.filter(program_type=0).filter(is_stop=0)
         for program in list(programs):
 
             # 获取结果表列表
@@ -47,6 +51,18 @@ class MaintainProgram:
                             'cron': cron, 'api': api, 'server_id': server_id}
             programs_info_new[str(sid)] = program_info
         return programs_info_new
+
+    # loop check 信息表
+    def _loop_check_table(self):
+        while True:
+            cron_program_info_dict = self._get_plan()
+
+            for sid in cron_program_info_dict:
+                if sid not in self.cron_program_obj_dic:
+                    self.cron_program_obj_dic[sid] = CronObj(**cron_program_info_dict[sid])
+                else:
+                    self.cron_program_obj_dic[sid].refresh(**cron_program_info_dict[sid])
+            sleep(30)
 
     # 将计划任务信息 从 缓存文件 中读取出来
     def read_from_tmp(self):

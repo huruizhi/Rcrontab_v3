@@ -66,26 +66,30 @@ class SendFailedLog:
                                 if msg_dict[i]:
                                     if_send = 1
                                     break
-                        if if_send:
-                            owner_obj = PyScriptOwnerListV2.objects.get(programs__sid=int(sid))
-                            mail = owner_obj.mail
-                            name = PyScriptBaseInfoV2.objects.get(sid=int(sid)).name
-                            owner = owner_obj.owner
-                            message = '''
-                                        责任人:{owner}
-                                        程序执行状态：{state}
-                                        产生时间：{occur_datetime}
-                                        程序日志信息：
-                                        {info}
-                                        '''.format(owner=owner, state=state, occur_datetime=occur_datetime, info=msg)
-
-                            title = '程序执行信息 - 接口：{name}'.format(name=name)
-
-                            send_mail(title, message, settings.DEFAULT_FROM_EMAIL, [admin_mail, mail],)
-                            logging.info("send mail - program info: sid:{sid},hash_id:{hash_id}".
-                                         format(msg=msg, sid=sid, hash_id=hash_id))
+                    except json.decoder.JSONDecodeError:
+                        if_send = 1
                     except Exception as e:
                         print(str(__name__) + ".SendFailedLog.send_mail\n:" + str(e))
+                        if_send = 0
+
+                    if if_send:
+                        owner_obj = PyScriptOwnerListV2.objects.get(programs__sid=int(sid))
+                        mail = owner_obj.mail
+                        name = PyScriptBaseInfoV2.objects.get(sid=int(sid)).name
+                        owner = owner_obj.owner
+                        message = '''
+                                    责任人:{owner}
+                                    程序执行状态：{state}
+                                    产生时间：{occur_datetime}
+                                    程序日志信息：
+                                    {info}
+                                    '''.format(owner=owner, state=state, occur_datetime=occur_datetime, info=msg)
+                        title = '程序执行信息 - 接口：{name}'.format(name=name)
+
+                        send_mail(title, message, settings.DEFAULT_FROM_EMAIL, [admin_mail, mail],)
+                        logging.info("send mail - program info: sid:{sid},hash_id:{hash_id}".
+                                     format(msg=msg, sid=sid, hash_id=hash_id))
+
         if log['type'] == 102:
             tid = log['tid']
             hash_id = log['hash_id']

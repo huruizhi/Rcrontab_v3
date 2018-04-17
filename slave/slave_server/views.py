@@ -3,6 +3,7 @@ from django.views import View
 import json
 from slave_server.schedulers import Scheduler
 # Create your views here.
+API = dict()
 
 
 class HoldConnection(View):
@@ -24,6 +25,7 @@ class RevExecPlan(View):
             cron = request.POST['cron']
             api = request.POST['api']
             sid = request.POST['sid']
+            API[sid] = api
             try:
                 Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
             except Exception as e:
@@ -66,6 +68,8 @@ class GetExecPlan(View):
             return HttpResponse(Scheduler.get_jobs())
         else:
             try:
-                return HttpResponse(Scheduler.get_job(sid=sid))
+                response = "API:{api} \n Scheduler: {scheduler}".format(api=API[sid],
+                                                                        scheduler=Scheduler.get_job(sid=sid))
+                return HttpResponse(response)
             except Exception as e:
                 return HttpResponse(str(e))

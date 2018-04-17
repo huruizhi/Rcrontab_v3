@@ -11,3 +11,8 @@ def get_hash(string):
     except Exception as e:
         string = json.dumps(time.time())
         return hashlib.md5(string.encode('utf-8')).hexdigest()[8:-8]
+
+
+def get_hash_ack(string):
+    string = json.dumps(string)
+    return hashlib.md5(string.encode('utf-8')).hexdigest()[8:-8]

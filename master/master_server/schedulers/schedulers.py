@@ -37,7 +37,7 @@ def send_program_status(sid, status, subversion=None):
         return
     hash_id = get_hash(info_dict)
     info_dict['hash_id'] = hash_id
-    sent_status = SendProgramStatus(message=info_dict, msg_type='program')
+    sent_status = SendProgramStatus(message=info_dict, msg_type='p')
     for i in range(10):
         result = sent_status.send_msg()
         if result:
@@ -47,12 +47,11 @@ def send_program_status(sid, status, subversion=None):
 
 class _Scheduler:
     def __init__(self):
-        job_store = SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
-        jobs_stores = {
-            'default': job_store,
+        jobstores = {
+            'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite'),
         }
         tz = pytz.timezone('Asia/Shanghai')
-        self._scheduler = BlockingScheduler(jobstores=jobs_stores, time_zone=tz)
+        self._scheduler = BlockingScheduler(jobstores=jobstores, time_zone=tz)
         thread = Thread(target=self._scheduler.start)
         thread.start()
 
@@ -60,18 +59,30 @@ class _Scheduler:
         minute, hour, day, month, day_of_week = cron_str.split()
         if day_of_week == '7' or day_of_week == '07':
             day_of_week = '0'
-        self._scheduler.add_job(_get_url, 'cron', minute=minute,
-                                hour=hour, day=day, month=month, day_of_week=day_of_week,
-                                id=str(sid)[0:5], name=str(sid)[0:5], replace_existing=True)
+        try:
+            self._scheduler.add_job(_get_url, 'cron', minute=minute,
+                                    hour=hour, day=day, month=month, day_of_week=day_of_week,
+                                    id=str(sid)[0:5], name=str(sid)[0:5], replace_existing=True)
+        except Exception as e:
+            print(__name__ + ":")
+            print(e)
 
     def add_job_deadline(self, cron_tree_hash, date_time, sid, status, subversion=None):
         if status in ['start', 'end']:
-            self._scheduler.add_job(send_program_status, 'date', run_date=date_time, id=cron_tree_hash,
-                                    name="{sid}: {status} deadline".format(sid=sid, status=status),
-                                    args=[sid, status, subversion])
+            try:
+                self._scheduler.remove_job(job_id=cron_tree_hash)
+            except Exception as e:
+                pass
+            finally:
+                self._scheduler.add_job(send_program_status, 'date', run_date=date_time, id=cron_tree_hash,
+                                        name="{sid}: {status} deadline".format(sid=sid, status=status),
+                                        args=[sid, status, subversion])
 
     def remove_job(self, job_id):
-        self._scheduler.remove_job(str(job_id))
+        try:
+            self._scheduler.remove_job(str(job_id))
+        except Exception as e:
+            pass
 
     def get_job_next_run_time(self, job_id):
         return self._scheduler.get_job(job_id).next_run_time

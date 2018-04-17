@@ -13,8 +13,10 @@ def _get_url(sid, url):
     parameter_str = "?sid={sid}&version={version}&subversion={subversion}".format(sid=sid, version=date.today(),
                                                                                   subversion=int(time.time())*1000)
     url = url+parameter_str
+    print(url)
     req = request.Request(url)
     page = request.urlopen(req).read()
+    print(page)
 
 
 class _Scheduler:
@@ -31,7 +33,7 @@ class _Scheduler:
 
     def add_job_url(self, sid, url, cron_str):
         minute, hour, day, month, day_of_week = cron_str.split()
-        if day_of_week == '7' or '07':
+        if day_of_week in ['7', '07']:
             day_of_week = '0'
         self._scheduler.add_job(_get_url, 'cron', args=(sid, url), minute=minute,
                                 hour=hour, day=day, month=month, day_of_week=day_of_week,
@@ -57,10 +59,10 @@ class _Scheduler:
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
-Scheduler = _Scheduler()
+# Scheduler = _Scheduler()
 
 
 if __name__ == '__main__':
-    url_1 = "http://192.168.0.157:3502/bond_v2/bond/PyBondShanghaiExchangeBaseInfo21"
-    _get_url(sid=217, url=url_1)
+    url_1 = "http://192.168.0.157:3601/brokers/brokersProcedure"
+    _get_url(sid=418, url=url_1)
 

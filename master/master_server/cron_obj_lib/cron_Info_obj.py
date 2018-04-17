@@ -21,8 +21,7 @@ class CronInfoObj:
 
         # 项目信息更改
         elif self.info_dict['hash_ack'] != hash_ack:
-            self.info_dict = info_dict_new
-            self.update_info_to_mongodb()
+            self.update_info_to_mongodb(**info_dict_new)
             self.info_dict = self.get_info_from_mongodb()
             self.send_exec_plan()
         else:
@@ -34,8 +33,7 @@ class CronInfoObj:
         # 部署服务器修改
         if server_id != self.info_dict['server_id']:
             self.drop_exec_plan()
-            self.info_dict['server_id'] = info_dict_new
-            self.update_info_to_mongodb()
+            self.update_info_to_mongodb(**{'server_id': server_id})
             self.send_exec_plan()
 
         # 将程序加入定时器
@@ -45,15 +43,17 @@ class CronInfoObj:
     def info_change(self,  sid, pre_tables, result_tables, cron, api, hash_ack):
         info_dict_new = {'sid': sid, 'result_tables': result_tables, 'pre_tables': pre_tables,
                          'cron': cron, 'api': api, 'hash_ack': hash_ack}
-        self.info_dict = info_dict_new
-        self.update_info_to_mongodb()
+        self.update_info_to_mongodb(**info_dict_new)
         self.send_exec_plan()
+        self.info_dict = self.get_info_from_mongodb()
+        # 修改定时器
+        Scheduler.remove_job(job_id=self.sid)
+        Scheduler.add_job_info(sid=self.sid, cron_str=self.info_dict['cron'])
 
     # 部署服务器更改
     def server_change(self, server_id):
         self.drop_exec_plan()
-        self.info_dict['server_id'] = server_id
-        self.update_info_to_mongodb()
+        self.update_info_to_mongodb(**{'server_id': server_id})
         self.send_exec_plan()
 
     # 修改指针
@@ -88,9 +88,10 @@ class CronInfoObj:
             return info
 
     # 向mongodb更新信息
-    def update_info_to_mongodb(self):
+    def update_info_to_mongodb(self, **kwargs):
         info_obj = CronProgramInfo.objects(sid=self.sid)
-        info_obj.update(**self.info_dict)
+        info_obj.update(**kwargs)
+        self.info_dict = self.get_info_from_mongodb()
 
     # 发送任务到slave
     def send_exec_plan(self):

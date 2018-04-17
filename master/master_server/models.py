@@ -71,7 +71,7 @@ class PyScriptBaseInfoV2(models.Model):
     program_type = models.IntegerField(verbose_name='程序类型', choices=program_type)
     version = models.DateField(blank=True, null=True)
     run_type = models.SmallIntegerField(choices=run_type, default=0)
-    pre_tables = models.ManyToManyField('TablesInfo', related_name='son_program', blank=True )
+    pre_tables = models.ManyToManyField('TablesInfo', related_name='son_program', blank=True)
     result_tables = models.ManyToManyField('TablesInfo', related_name='father_program')
     path = models.ForeignKey('Path', on_delete=models.CASCADE, related_name='program')
     function = models.TextField(verbose_name='程序功能', max_length=50)

@@ -11,8 +11,10 @@ class CronTreeObj:
         self.info_dict = dict()
         if hash_id:
             self.get_old_obj(hash_id)
-            if self.info_dict['status'] == 1:
+            if self.info_dict['status'] == 0:
                 self._set_start_deadline_scheduler()
+            elif self.info_dict['status'] == 1:
+                self._set_end_deadline_scheduler()
         else:
             self.create_new_obj(sid, pre_version)
 
@@ -31,7 +33,7 @@ class CronTreeObj:
             self.info_dict = info
 
     # 创建新的对象
-    def create_new_obj(self, sid, pre_version):
+    def create_new_obj(self, sid, pre_version=None):
         if not pre_version:
             pre_version = 'init'
         info = {'sid': sid, 'status': 0, 'pre_version': pre_version}
@@ -119,3 +121,11 @@ class CronTreeObj:
         print(self.info_dict)
         tree_obj = CronProgramVersionTree.objects(hash_id=self.info_dict['hash_id'])
         tree_obj.update(**self.info_dict)
+
+    # 更新定时器
+    def update_dead_line(self):
+        self._remove_deadline_scheduler()
+        if self.info_dict['status'] == 0:
+            self._set_start_deadline_scheduler()
+        elif self.info_dict['status'] == 1:
+            self._set_end_deadline_scheduler()

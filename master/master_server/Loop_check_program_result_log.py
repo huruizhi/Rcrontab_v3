@@ -5,6 +5,8 @@ from master_server.packages.hash import get_hash
 import json
 from master_server.packages.event_product import EventProduct
 from time import sleep
+import pymysql
+from django.db.models import Avg, Max, Min, Count
 
 
 """
@@ -18,12 +20,13 @@ class LoopReadResultLog:
 
     def __init__(self):
         try:
-            self.pk = ResultLog.objects.filter(flag=1).order_by('-pk')[0].pk
+            self.pk = ResultLog.objects.filter(flag=1).aggregate(Max('pk'))['pk__max']
         except Exception as e:
             self.pk = 0
 
     def _read_log(self):
-        max_flag = ResultLog.objects.all().order_by('-pk')[0]
+        max_flag = ResultLog.objects.order_by('-pk')[0]
+
         max_flag_pk = max_flag.pk
 
         if self.pk == max_flag_pk:

@@ -4,7 +4,12 @@ import pika
 class ReceiveRabbitMQMessage:
     def __init__(self, name, target=None):
         name = str(name)
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.156'))
+        for i in range(10):
+            try:
+                connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.156'))
+                break
+            except Exception as e:
+                pass
         self.channel = connection.channel()
         self.channel.exchange_declare(exchange='events', exchange_type='fanout')
         result = self.channel.queue_declare(queue=name)
