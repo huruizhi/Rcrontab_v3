@@ -27,12 +27,13 @@ def send_program_status(sid, status, subversion=None):
     if status == 'start':
         msg_type = 4
         info = '{sid}: Running miss start'.format(sid=sid)
-        info_dict = {'sid': sid, 'type': msg_type, 'info': info, 'occur_datetime': occur_datetime}
+        info_dict = {'sid': sid, 'type': msg_type, 'info': info, 'occur_datetime': occur_datetime,
+                     'source': 'apscheduler'}
     elif status == 'end':
         msg_type = 5
         info = '{sid}: Not back the end status to Mysql database!'.format(sid=sid)
         info_dict = {'sid': sid, 'type': msg_type, 'info': info,
-                     'occur_datetime': occur_datetime, 'subversion': subversion}
+                     'occur_datetime': occur_datetime, 'subversion': subversion, 'source': 'apscheduler'}
     else:
         return
     hash_id = get_hash(info_dict)

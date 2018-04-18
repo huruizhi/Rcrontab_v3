@@ -5,6 +5,7 @@ from master_server.packages.receive import ReceiveRabbitMQMessage
 from master_server.packages.log_module import WriteLog
 import json
 from threading import Thread
+from time import sleep
 
 
 class CronObj:
@@ -91,6 +92,8 @@ class CronObj:
         elif cron_tree_status == 0 and status == 5:
             subversion = log_dict['subversion']
             self.unusual_end(status=status, hash_id=hash_id, subversion=subversion)
+        
+        sleep(30)
 
     #  异常退出
     def unusual_end(self, status, hash_id, subversion=None):

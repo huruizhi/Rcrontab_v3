@@ -15,8 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from master_server.maintain_programs import MaintainProgram
+from master_server.Loop_check_program_result_log import LoopReadResultLog
+from master_server.mail_failed_log import SendFailedLog
+# from multiprocessing import Process
+from threading import Thread
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('master_server/', include('master_server.urls'))
 ]
+
+
+def get_start():
+    programs = MaintainProgram()
+    threads = list()
+    threads.append(Thread(target=SendFailedLog().start))
+    threads.append(Thread(target=LoopReadResultLog().loop_read_log))
+
+    for thread in threads:
+        thread.start()
+
+
+# get_start()

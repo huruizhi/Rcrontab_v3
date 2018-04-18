@@ -1,4 +1,5 @@
 import pika
+from time import sleep
 
 
 class ReceiveRabbitMQMessage:
@@ -6,10 +7,11 @@ class ReceiveRabbitMQMessage:
         name = str(name)
         for i in range(10):
             try:
-                connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.156'))
+                connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.156',
+                                                                               heartbeat_interval=60,))
                 break
             except Exception as e:
-                pass
+                sleep(1)
         self.channel = connection.channel()
         self.channel.exchange_declare(exchange='events', exchange_type='fanout')
         result = self.channel.queue_declare(queue=name)

@@ -49,8 +49,9 @@ class LoopReadResultLog:
                 subversion = r.subversion.strftime('%Y-%m-%d %H:%M:%S') if r.subversion else version
                 occur_datetime = r.event_time.strftime('%Y-%m-%d %H:%M:%S')
 
+                source = "Mysql_ResultLog_PK:{pk}".format(pk=r.pk)
                 event_info = {'sid': r.script_id, 'type': r.event_type, 'info': r.extra_info, 'version': version,
-                              'subversion': subversion, 'occur_datetime': occur_datetime}
+                              'subversion': subversion, 'occur_datetime': occur_datetime, 'source': source}
 
                 hash_id = get_hash(event_info)
                 event_info['hash_id'] = hash_id

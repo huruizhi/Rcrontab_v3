@@ -26,6 +26,7 @@ class EventsHub(Document):
     version = mn.DateTimeField()
     subversion = mn.DateTimeField()
     occur_datetime = mn.DateTimeField()
+    source = mn.StringField(max_length=50)
 
 
 class CronProgramVersionTree(Document):
