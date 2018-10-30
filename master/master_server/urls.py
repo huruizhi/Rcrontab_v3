@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from master_server import views
+from master_server.views import *
 
+app_name = 'master_server'
 urlpatterns = [
-
+    path('check_status/<info_type>/', CheckStatus.as_view()),
+    path('get_plan/<job_id>/', GetExecPlan.as_view()),
+    path('get_plan/', GetExecPlan.as_view()),
+    path('del_plan/', DelExecPlan.as_view()),
+    path('start/', ServerStart.as_view()),
+    path('add_program/', AddProgramApi.as_view(), name='insert'),
+    path('send_plan/', SendExecPlan.as_view()),
+    path('program/status/<option>/', ProgramStatusCheck.as_view()),
+    path('slave_program_result/', SlaveProgramResult.as_view()),
+    path('sync_result/', SyncResult.as_view())
 ]

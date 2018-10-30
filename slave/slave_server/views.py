@@ -1,8 +1,12 @@
 from django.shortcuts import HttpResponse
 from django.views import View
-import json
 from slave_server.schedulers import Scheduler
 # Create your views here.
+from urllib import request as rt
+from service_start import ThreadManage
+
+
+API = dict()
 
 
 class HoldConnection(View):
@@ -18,46 +22,41 @@ class HoldConnection(View):
 
 class RevExecPlan(View):
 
-    def post(self, request):
-        print(request.post)
-        if 'add_list' in request.post:
+    def post(self, request, action):
+        if action == 'add':
             err_string = ''
-            add_list = json.loads(request.post['add_list'])
-            for program in add_list:
-                cron = program['crontab']
-                api = program['path']
-                sid = program['sid']
-                try:
-                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
-                except Exception as e:
-                    err_string = err_string+str(e)
-                if err_string:
-                    return HttpResponse(err_string)
-                return HttpResponse('add success')
+            cron = request.POST['cron']
+            api = request.POST['api']
+            sid = request.POST['sid']
+            API[sid] = api
+            try:
+                Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+            except Exception as e:
+                err_string = err_string+str(e)
+            if err_string:
+                return HttpResponse(err_string)
+            return HttpResponse('add success')
 
-        if 'add_list' in request.post:
+        if action == 'mod':
             err_string = ''
-            add_list = json.loads(request.post['add_list'])
-            for program in add_list:
-                cron = program['crontab']
-                api = program['path']
-                sid = program['sid']
-                try:
-                    Scheduler.remove_job(sid=sid)
-                    Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
-                except Exception as e:
-                    err_string = err_string+str(e)
-                if err_string:
-                    return HttpResponse(err_string)
-                return HttpResponse('modify success')
+            cron = request.POST['cron']
+            api = request.POST['api']
+            sid = request.POST['sid']
+            try:
+                Scheduler.remove_job(sid=sid)
+                Scheduler.add_job_url(sid=sid, url=api, cron_str=cron)
+            except Exception as e:
+                err_string = err_string+str(e)
+            if err_string:
+                return HttpResponse(err_string)
+            return HttpResponse('modify success')
 
-        if 'del_list' in request.post:
-            del_list = json.loads(request.post['del_list'])
+        if action == 'del':
             err_string = ''
-            for sid in del_list:
-                try:
-                    Scheduler.remove_job(sid=sid)
-                except Exception as e:
+            try:
+                sid = request.POST['sid']
+                Scheduler.remove_job(sid=sid)
+            except Exception as e:
                     err_string = err_string+str(e)
             if err_string:
                 return HttpResponse(err_string)
@@ -72,6 +71,48 @@ class GetExecPlan(View):
             return HttpResponse(Scheduler.get_jobs())
         else:
             try:
-                return HttpResponse(Scheduler.get_job(sid=sid))
+                response = "API:{api} \n Scheduler: {scheduler}".format(api=API[sid],
+                                                                        scheduler=Scheduler.get_job(sid=sid))
+                return HttpResponse(response)
             except Exception as e:
                 return HttpResponse(str(e))
+
+
+class ExecuteApi(View):
+    def post(self, request):
+        url = request.POST['url']
+        page = ''
+        try:
+            req = rt.Request(url)
+            page = rt.urlopen(req, timeout=10).read()
+            page = page.decode('utf-8')
+        except Exception as e:
+            page = str(e)
+        finally:
+            return HttpResponse(page)
+
+
+class ServerStart(View):
+    """
+    启动程序
+    """
+    def get(self, request):
+        result = ThreadManage.begin()
+        if result:
+            return HttpResponse("server start successful!")
+        else:
+            return HttpResponse("server has started!")
+
+
+class CheckStatus(View):
+    """
+    检查程序状态
+    """
+    def get(self, request, info_type):
+        if info_type == "send_mail":
+            check_mail = ThreadManage.check_mail()
+            check_mail_str = '<br>'.join(check_mail)
+            return HttpResponse(check_mail_str)
+        elif info_type == "threads":
+            resp = ThreadManage.check()
+            return HttpResponse(resp, content_type="application/json")

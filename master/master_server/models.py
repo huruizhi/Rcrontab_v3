@@ -11,10 +11,11 @@ class ServerInfo(models.Model):
     status = models.IntegerField(choices=is_alive, default=0)
 
     def __str__(self):
-        return 'IP:%s, is_alive:%s' % (self.ip, self.status)
+        return 'IP:%s, Port:%s' % (self.ip, self.port)
 
     class Meta:
         db_table = 'py_script_server_info_v2'
+        app_label = "master_server"
 
 
 class Path(models.Model):
@@ -28,23 +29,27 @@ class Path(models.Model):
     class Meta:
         db_table = 'py_script_programs_path'
         unique_together = ('server', 'path', 'project')
+        app_label = "master_server"
 
 
 class ConfigFileLog(models.Model):
     path = models.ForeignKey('Path', on_delete=models.DO_NOTHING)
-    project_conf = models.FileField(upload_to='project_conf/', unique=True)
+    project_conf = models.FileField(upload_to='project_conf/')
     project_package = models.FileField(upload_to='project_package/', blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'py_script_config_file_log'
+        app_label = "master_server"
 
 
 class TablesInfo(models.Model):
     db = (('db_ali', 'db_阿里云'), ('db_151', 'db_151'), ('db_153', 'db_153'), ('db_155', 'db_155'))
+    source = ((0, '程序产生'), (1, '人工录入'), (2, '其他'))
     db_server = models.CharField(max_length=20, choices=db)
     db_name = models.CharField(max_length=30)
     table_name = models.CharField(max_length=100)
+    data_source = models.IntegerField(choices=source, default=0)
 
     def __str__(self):
         return "%s:%s.%s" % (self.db_server, self.db_name, self.table_name)
@@ -52,6 +57,7 @@ class TablesInfo(models.Model):
     class Meta:
         db_table = 'py_script_tables_info'
         unique_together = ('db_server', 'db_name', 'table_name')
+        app_label = "master_server"
 
 
 class PyScriptBaseInfoV2(models.Model):
@@ -62,7 +68,7 @@ class PyScriptBaseInfoV2(models.Model):
     run_type = ((0, '调用api'),
                 (1, '调用程序'))
 
-    program_type = ((0, '抓取'),
+    program_type = ((0, '计划任务'),
                     (1, '计算'),
                     (2, '其他'))
 
@@ -71,7 +77,7 @@ class PyScriptBaseInfoV2(models.Model):
     program_type = models.IntegerField(verbose_name='程序类型', choices=program_type)
     version = models.DateField(blank=True, null=True)
     run_type = models.SmallIntegerField(choices=run_type, default=0)
-    pre_tables = models.ManyToManyField('TablesInfo', related_name='son_program', blank=True )
+    pre_tables = models.ManyToManyField('TablesInfo', related_name='son_program', blank=True)
     result_tables = models.ManyToManyField('TablesInfo', related_name='father_program')
     path = models.ForeignKey('Path', on_delete=models.CASCADE, related_name='program')
     function = models.TextField(verbose_name='程序功能', max_length=50)
@@ -85,6 +91,7 @@ class PyScriptBaseInfoV2(models.Model):
 
     class Meta:
         db_table = 'py_script_base_info_v2'
+        app_label = "master_server"
 
 
 class PyScriptOwnerListV2(models.Model):
@@ -96,11 +103,11 @@ class PyScriptOwnerListV2(models.Model):
 
     class Meta:
         db_table = 'py_script_owners_info_v2'
+        app_label = "master_server"
 
 
 class ResultLog(models.Model):
-    event_type_list = ((0, '执行调度'), (1, '开始执行'), (2, '正常结束'), (3, '异常终止'),
-                       (4, '质控正常'), (5, '质控异常'))
+    event_type_list = ((0, '执行调度'), (1, '开始执行'), (2, '正常结束'), (3, '异常终止'),)
     script = models.ForeignKey('PyScriptBaseInfoV2', on_delete=models.CASCADE,
                                related_name='result', db_column='sid', null=True)
     version = models.DateField()
@@ -111,10 +118,11 @@ class ResultLog(models.Model):
     flag = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.script, self.version
+        return "script:{script}, version:{version}".format(script=self.script, version=self.version)
 
     class Meta:
         db_table = 'py_script_result_log'
+        app_label = "master_server"
 
 
 

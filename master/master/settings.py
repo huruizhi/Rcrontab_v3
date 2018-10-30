@@ -26,8 +26,9 @@ SECRET_KEY = 'gl_4uv47r*^3t&3%3&fushdkf9*g8jlq=hxf1+@3-(eb34++b+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
 # Application definition
 
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'master_server'
+    'master_server',
 ]
 
 MIDDLEWARE = [
@@ -73,21 +74,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'master.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'py_crontab_v3',
+        'NAME': 'py_crontab',
         'USER': 'pycf',
         'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.151',
+        'HOST': '192.168.0.153',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
-    }
+    },
 }
 
+DATABASE_ROUTERS = ['master.database_router.DatabaseAppsRouter']
+DATABASE_APPS_MAPPING = {
+    'master_server': 'default',
+    'remote_app_155': '155',
+    'remote_db': 'ali',
+    'remote_app_ali': 'ali_cron',
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -126,6 +131,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,  'media')
+STATICFILES_DIRS = (os.path.join(BASE_DIR,  'static'),)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
 
 # send mail

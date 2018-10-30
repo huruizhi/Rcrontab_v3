@@ -13,11 +13,7 @@ def my_listener(event):
     print(Scheduler.get_job(event.job_id).trigger)
 
 
-Scheduler.add_job_url(sid=1, url="http://www.baidu.com", cron_str=program_cron_str_1)
-# Scheduler.add_job_url(sid=2, url="http://www.baidu.com", cron_str=program_cron_str_2)
-sleep(1)
-
-Scheduler._scheduler.add_listener(my_listener, events.EVENT_JOB_SUBMITTED)
+Scheduler._scheduler.add_listener(my_listener, events.EVENT_ALL)
 
 
 

@@ -1,0 +1,105 @@
+{% extends 'Base.html' %}
+
+{% block container %}
+
+
+     <form  enctype="multipart/form-data" method="post" name="plan_info" id="insert_plan">
+			<div class="modal-body">{% csrf_token %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>字段</th>
+        <th>值</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in form %}
+        <tr>
+        <td>{{ item.label_tag }}</td>
+        <td>{{ item }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if errs %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ errs }}
+</div>
+{% endif %}
+			</div>
+			<div class="modal-footer">
+			</div>
+            </form>
+                <button type="button" class="btn btn-primary" onclick="submit_data()" data-toggle="modal" data-target="#myModal">
+					提交
+				</button>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">提交执行计划</h4>
+      </div>
+      <div class="modal-body">
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%"><span class="sr-only">0%</span>
+        </div>
+        </div>
+          <div id="in_modal">
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+function onprogress(evt){
+　　var loaded = evt.loaded;     //已经上传大小情况
+ var tot = evt.total;      //附件总大小
+ var per = Math.floor(100*loaded/tot);  //已经上传的百分比
+　　$(".progress-bar").css('width',per+"%")
+    $(".progress-bar").text(per)
+
+}
+
+function submit_data() {
+    var form_data = new FormData();
+    form_data.append('path', $('#id_path').val());
+    form_data.append('project_conf', $('#id_project_conf')[0].files[0]);
+    form_data.append('project_package', $('#id_project_package')[0].files[0]);
+    form_data.append('comments', $('#id_comments').val());
+    $(".progress-bar").css('width',"0%")
+    $(".progress-bar").text(0)
+            $.ajax({
+                type:"post",
+                url: "{{ request.path }}",
+                data: form_data,
+                contentType:false,
+                processData:false,
+
+                //这里我们先拿到jQuery产生的 XMLHttpRequest对象，为其增加 progress 事件绑定
+                xhr: function(){
+　　　　　　    var xhr = $.ajaxSettings.xhr();
+　　　　　　    if(onprogress && xhr.upload) {
+　　　　　　　　xhr.upload.addEventListener("progress" , onprogress, false);
+　　　　　　　　return xhr;}
+　　　　        },
+                success:function (arg) {
+                    $("#in_modal").empty()
+                    $("#in_modal").append(arg)
+            }
+    });
+}
+
+
+</script>
+{% endblock %}
