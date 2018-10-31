@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'slave_server',
-    'mysql_sync_log',
     'program_result_log',
 ]
 

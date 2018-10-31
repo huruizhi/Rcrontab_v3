@@ -11,6 +11,8 @@ from check_tools.get_parent_son import ParenSonInfo
 from master_server.packages.slave_program_result_log import SlaveResultLog
 from master_server.packages.mysql_sync_result import MysqlSyncLog
 from master_server.packages.log_module import result_reader
+
+from check_tools.get_cal_info import GetCalInfo
 # Create your views here.
 
 
@@ -144,3 +146,10 @@ class SyncResult(View):
             return HttpResponse("OK")
         except Exception as e:
             return HttpResponse("Error")
+
+
+class GetCalResult(View):
+    def get(self, request, pk=None):
+        g = GetCalInfo(pk)
+        return HttpResponse(g())
+

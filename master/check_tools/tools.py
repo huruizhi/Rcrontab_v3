@@ -19,6 +19,7 @@ from master_server import mongo_models as mo
 import json
 from master_server.packages.event_product import EventProduct
 from time import sleep
+from master_server.packages.mysql_sync_result import MysqlSyncLog
 
 
 class MysqlSync:
@@ -532,13 +533,28 @@ def get_sync_miss_table():
     for i in table_list:
         db_name, table_name = i.split(".")
         print(db_name, table_name)
-        sleep(3)
-        mq = MysqlSync(db_name, table_name)
+        tables = TablesInfo.objects.filter(table_name=table_name, db_name=db_name)
+        occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        for table_info in tables:
+            db_server = table_info.db_server
+            db_name = table_info.db_name
+            table_name = table_info.table_name
+
+            data = {'db_server': db_server, 'table_name': table_name,
+                    'db_name': db_name, 'occur_datetime': occur_datetime}
+            data = json.dumps(data)
+            if db_server != 'db_153':
+                try:
+                    MysqlSyncLog(data)
+                    print("success! {data}".format(data=data))
+                except Exception as e:
+                    print("failed! {data} {err}".format(data=data, err=e))
 
 
 if __name__ == "__main__":
     date_today = datetime.now()
     date_today = date_today.strftime('%Y-%m-%d')
+    # get_sync_miss_table()
     """
     刷新依赖关系
     """
@@ -564,15 +580,15 @@ if __name__ == "__main__":
     """
     表结果更新
     """
-    # tid = [2373]
-    # for t in tid:
-    #     table_success(t)
+    tid = [3324]
+    for t in tid:
+        table_success(t)
 
     """
     重新调用程序
     """
 
-    # for i in [715]:
+    # for i in [639]:
     #     a = slave_exec_api(i, date_today)
     #     print(a)
 
@@ -613,7 +629,7 @@ if __name__ == "__main__":
     """
     表同步
     """
-    get_sync_miss_table()
+    # get_sync_miss_table()
 
     # a = ['py_daziguan_2_1.py_hgyz_interbank_lending_day']
     # for i in a:
@@ -640,7 +656,7 @@ if __name__ == "__main__":
     #    print(t)
     # t = m.TablesInfo.objects.filter(father_program__sid=510)
     # print(t)
-
+    #
     # i = 0
     # for p in mo.CalProgramInfo.objects.all():
     #     p_v = mo.CalVersionTree.objects.get(hash_id=p.pointer)
@@ -650,3 +666,27 @@ if __name__ == "__main__":
     #         print('{num}======='.format(num=i))
     #         a = slave_exec_api(p_v.sid, '2018-08-08')
     #         print(a)
+
+    # table_list = list()
+    # i = 0
+    # for p in CalProgramInfo.objects.all():
+    #     p_v = CalVersionTree.objects.get(hash_id=p.pointer)
+    #     if p_v.pre_version == 'init':
+    #         i = i + 1
+    #         p_v_info = json.loads(p_v.to_json())
+    #         # print('{num}======='.format(num=i))
+    #         # print(p_v_info)
+    #         pre_tables = p_v_info['pre_tables']
+    #         num = 0
+    #         for tid in pre_tables:
+    #             if pre_tables[tid] == '':
+    #                 num=1
+    #                 break
+    #         if num == 0:
+    #             print(p_v.sid)
+    #             print(p_v_info)
+    #             a = slave_exec_api(p_v.sid, date_today)
+    #             print(a)
+
+
+

@@ -1,5 +1,5 @@
 from master_server.packages.receive import ReceiveRabbitMQMessage
-from master_server.models import TablesInfo
+from master_server.models import TablesInfo, PyScriptBaseInfoV2
 from urllib import request
 from master_server.packages.log_module import mysql_sync
 import json
@@ -8,6 +8,8 @@ from master_server.mysqlsyncAPI.mysql_sync_mq import MysqlSyncMQ
 from time import sleep
 from random import random
 from threading import Thread
+from datetime import datetime
+from master_server.packages.mysql_sync_result import MysqlSyncLog
 
 
 class MysqlSync:
@@ -38,25 +40,43 @@ class MysqlSync:
     # 同步数据库，调用同步消费者
     @staticmethod
     def mysql_sync_func(db_name, table_name, hash_id):
-        sleep_time = int(60*20+10*60*random())
-        sleep(sleep_time)
+        # sleep_time = int(60*5+1*60*random())
+        # sleep(sleep_time)
         page = ''
-        table = "{db_name}.{table_name}".format(db_name=db_name, table_name=table_name)
-        sync_pai = {"table_name": table, "token": "MpaCG=xN8Q5XL0b>#SdEhcpD", "taskid": hash_id}
-        header = {'Content-Type': 'application/json'}
-        # url = 'http://120.27.245.74:3810/create/tasks'
-        url = 'http://192.168.0.156:3810/create/tasks'
-        data = json.dumps(sync_pai).encode('utf-8')
-        req = request.Request(url, data=data, headers=header)
+        # table = "{db_name}.{table_name}".format(db_name=db_name, table_name=table_name)
+        # sync_pai = {"table_name": table, "token": "MpaCG=xN8Q5XL0b>#SdEhcpD", "taskid": hash_id}
+        # header = {'Content-Type': 'application/json'}
+        #  url = 'http://120.27.245.74:3810/create/tasks'
+        # url = 'http://192.168.0.156:3810/create/tasks'
+        # data = json.dumps(sync_pai).encode('utf-8')
+        # req = request.Request(url, data=data, headers=header)
+#
+        # try:
+        #    page = request.urlopen(req).read()
+        #    page = page.decode('utf-8')
+        # except Exception as e:
+        #    page = "{page}, Mq_Err {err}".format(page=page, err=str(e))
+        # finally:
+        #    mysql_sync.info(
+        #        '{db_name}.{table_name}:{page}'.format(db_name=db_name, table_name=table_name, page=page))
+        occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        if not is_connection_usable():
+            connection.close()
+        tables = TablesInfo.objects.filter(table_name=table_name, db_name=db_name)
+        for table_info in tables:
+            db_server = table_info.db_server
+            db_name = table_info.db_name
+            table_name = table_info.table_name
 
-        try:
-            page = request.urlopen(req).read()
-            page = page.decode('utf-8')
-        except Exception as e:
-            page = "{page}, Mq_Err {err}".format(page=page, err=str(e))
-        finally:
-            mysql_sync.info(
-                '{db_name}.{table_name}:{page}'.format(db_name=db_name, table_name=table_name, page=page))
+            data = {'db_server': db_server, 'table_name': table_name,
+                    'db_name': db_name, 'occur_datetime': occur_datetime}
+            data = json.dumps(data)
+            if db_server != 'db_153':
+                try:
+                    MysqlSyncLog(data)
+                    mysql_sync.info("success! {data}".format(data=data))
+                except Exception as e:
+                    mysql_sync.error("failed! {data} {err}".format(data=data, err=e))
 
 
 def is_connection_usable():
