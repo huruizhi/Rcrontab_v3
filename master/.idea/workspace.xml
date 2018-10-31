@@ -11,26 +11,26 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/master$event_product.coverage" NAME="event_product Coverage Results" MODIFIED="1535418038007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/master_server/packages" />
-    <SUITE FILE_PATH="coverage/master$restart_master.coverage" NAME="restart_master Coverage Results" MODIFIED="1540967509868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/check_tools" />
+    <SUITE FILE_PATH="coverage/master$restart_master.coverage" NAME="restart_master Coverage Results" MODIFIED="1540982615897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/check_tools" />
     <SUITE FILE_PATH="coverage/master$quality_control_new.coverage" NAME="quality_control_new Coverage Results" MODIFIED="1533181885072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/master_server/packages" />
-    <SUITE FILE_PATH="coverage/master$test.coverage" NAME="test Coverage Results" MODIFIED="1540972784456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/master$test.coverage" NAME="test Coverage Results" MODIFIED="1540982595213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/master$qc_web_api_record.coverage" NAME="qc_web_api_record Coverage Results" MODIFIED="1532401438906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/master_server/packages" />
     <SUITE FILE_PATH="coverage/master$program_transfer.coverage" NAME="program_transfer Coverage Results" MODIFIED="1539656348077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/program_transfer" />
     <SUITE FILE_PATH="coverage/master$mail_failed_log.coverage" NAME="mail_failed_log Coverage Results" MODIFIED="1524622039631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/master_server" />
     <SUITE FILE_PATH="coverage/master$models.coverage" NAME="models Coverage Results" MODIFIED="1528339432825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/remote_app_ali" />
     <SUITE FILE_PATH="coverage/master$health_check.coverage" NAME="health_check Coverage Results" MODIFIED="1537326027180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/check_tools" />
-    <SUITE FILE_PATH="coverage/master$get_cal_info.coverage" NAME="get_cal_info Coverage Results" MODIFIED="1540975491228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/check_tools" />
+    <SUITE FILE_PATH="coverage/master$get_cal_info.coverage" NAME="get_cal_info Coverage Results" MODIFIED="1540982498709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/check_tools" />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="155">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="209">
       <file leaf-file-name="restart_master.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/check_tools/restart_master.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="627">
+              <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -38,11 +38,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master/settings.py">
+      <file leaf-file-name="cal_tree_obj.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_tree_obj.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#93#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="event_product.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cal_info_obj.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_info_obj.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -51,13 +73,12 @@
       <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/check_tools/tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="732">
-              <caret line="579" column="7" lean-forward="true" selection-start-line="579" selection-start-column="7" selection-end-line="579" selection-end-column="7" />
+            <state relative-caret-position="417">
+              <caret line="569" column="4" lean-forward="false" selection-start-line="569" selection-start-column="4" selection-end-line="569" selection-end-column="25" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#863#1867#0" expanded="false" />
                 <element signature="e#1931#2884#0" expanded="false" />
-                <element signature="e#2943#4408#0" expanded="false" />
                 <element signature="e#4431#4908#0" expanded="false" />
                 <element signature="e#4941#6471#0" expanded="false" />
                 <element signature="e#6506#7353#0" expanded="false" />
@@ -68,10 +89,30 @@
                 <element signature="e#14753#15078#0" expanded="false" />
                 <element signature="e#15117#15334#0" expanded="false" />
                 <element signature="e#15370#15483#0" expanded="false" />
-                <element signature="e#15545#16342#0" expanded="false" />
-                <element signature="e#16389#17880#0" expanded="false" />
-                <marker date="1540972779558" expanded="true" signature="20288:20372" ph="..." />
+                <element signature="e#16390#17881#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maintain_programs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/maintain_programs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cal_obj.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,8 +120,8 @@
       <file leaf-file-name="get_cal_info.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/check_tools/get_cal_info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="95" column="21" lean-forward="true" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
+            <state relative-caret-position="330">
+              <caret line="104" column="20" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
               <folding>
                 <element signature="e#15#24#0" expanded="true" />
               </folding>
@@ -92,17 +133,7 @@
         <entry file="file://$PROJECT_DIR$/master_server/collect_info_to_mq.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="362">
-              <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="event_product.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+              <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -111,43 +142,9 @@
       <file leaf-file-name="mysql_sync.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="65" />
+            <state relative-caret-position="-34">
+              <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mysql_sync_result.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="36" column="38" lean-forward="true" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="152" column="17" lean-forward="true" selection-start-line="152" selection-start-column="17" selection-end-line="152" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-              <folding>
-                <element signature="e#630#658#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,7 +161,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Scheduler.add_job_info</find>
       <find>8</find>
       <find>569</find>
       <find>MysqlSync</find>
@@ -194,6 +190,7 @@
       <find>SET SESSION</find>
       <find>'status': 1</find>
       <find>SendProgramStatus</find>
+      <find>slave_exec_api</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -238,7 +235,6 @@
         <option value="$PROJECT_DIR$/master_server/schedulers/schedulers.py" />
         <option value="$PROJECT_DIR$/master/settings.py" />
         <option value="$PROJECT_DIR$/master_server/models.py" />
-        <option value="$PROJECT_DIR$/master_server/packages/event_product.py" />
         <option value="$PROJECT_DIR$/master_server/packages/receive.py" />
         <option value="$PROJECT_DIR$/master_server/cron_obj_lib/cron_tree_obj.py" />
         <option value="$PROJECT_DIR$/master_server/cron_obj_lib/cron_Info_obj.py" />
@@ -247,12 +243,13 @@
         <option value="$PROJECT_DIR$/program_transfer/program_transfer.py" />
         <option value="$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/pymysql/err.py" />
         <option value="$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/django/db/backends/mysql/base.py" />
-        <option value="$PROJECT_DIR$/check_tools/restart_master.py" />
         <option value="$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py" />
-        <option value="$PROJECT_DIR$/check_tools/tools.py" />
-        <option value="$PROJECT_DIR$/master_server/urls.py" />
         <option value="$PROJECT_DIR$/master_server/views.py" />
+        <option value="$PROJECT_DIR$/master_server/urls.py" />
+        <option value="$PROJECT_DIR$/master_server/packages/event_product.py" />
         <option value="$PROJECT_DIR$/check_tools/get_cal_info.py" />
+        <option value="$PROJECT_DIR$/check_tools/tools.py" />
+        <option value="$PROJECT_DIR$/check_tools/restart_master.py" />
       </list>
     </option>
   </component>
@@ -311,7 +308,18 @@
             <path>
               <item name="master" type="b2602c69:ProjectViewProjectNode" />
               <item name="master" type="462c0819:PsiDirectoryNode" />
+              <item name="check_tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="master" type="462c0819:PsiDirectoryNode" />
               <item name="master_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="master" type="462c0819:PsiDirectoryNode" />
+              <item name="master_server" type="462c0819:PsiDirectoryNode" />
+              <item name="packages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -357,7 +365,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.get_cal_info">
+  <component name="RunManager" selected="Python.restart_master">
     <configuration name="get_cal_info" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -486,9 +494,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.get_cal_info" />
+        <item index="0" class="java.lang.String" itemvalue="Python.restart_master" />
         <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.restart_master" />
+        <item index="2" class="java.lang.String" itemvalue="Python.get_cal_info" />
         <item index="3" class="java.lang.String" itemvalue="Python.program_transfer" />
         <item index="4" class="java.lang.String" itemvalue="Python.health_check" />
       </list>
@@ -596,12 +604,12 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31600833" sideWeight="0.48189563" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3841642" sideWeight="0.31502423" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33471933" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.487526" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44698545" sideWeight="0.68659127" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44490644" sideWeight="0.81098545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14530386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20790021" sideWeight="0.68370605" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2383049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2383049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -623,12 +631,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3841642" sideWeight="0.31502423" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44698545" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.487526" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44698545" sideWeight="0.68659127" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44490644" sideWeight="0.81098545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14530386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20790021" sideWeight="0.68370605" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2383049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2383049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -697,37 +705,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/check_tools/health_check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1387">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_tools/get_parent_son.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1501">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_tools/get_hist_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/mongo_models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1957">
-          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/pymysql/err.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1976">
@@ -753,7 +730,6 @@
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#863#1867#0" expanded="false" />
             <element signature="e#1931#2884#0" expanded="false" />
-            <element signature="e#2943#4408#0" expanded="false" />
             <element signature="e#4431#4908#0" expanded="false" />
             <element signature="e#4941#6471#0" expanded="false" />
             <element signature="e#6506#7353#0" expanded="false" />
@@ -764,9 +740,7 @@
             <element signature="e#14753#15078#0" expanded="false" />
             <element signature="e#15117#15334#0" expanded="false" />
             <element signature="e#15370#15483#0" expanded="false" />
-            <element signature="e#15545#16342#0" expanded="false" />
-            <element signature="e#16389#17880#0" expanded="false" />
-            <marker date="1540972779558" expanded="true" signature="20288:20372" ph="..." />
+            <element signature="e#16390#17881#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -856,7 +830,6 @@
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#863#1867#0" expanded="false" />
             <element signature="e#1931#2884#0" expanded="false" />
-            <element signature="e#2943#4408#0" expanded="false" />
             <element signature="e#4431#4908#0" expanded="false" />
             <element signature="e#4941#6471#0" expanded="false" />
             <element signature="e#6506#7353#0" expanded="false" />
@@ -867,9 +840,7 @@
             <element signature="e#14753#15078#0" expanded="false" />
             <element signature="e#15117#15334#0" expanded="false" />
             <element signature="e#15370#15483#0" expanded="false" />
-            <element signature="e#15545#16342#0" expanded="false" />
-            <element signature="e#16389#17880#0" expanded="false" />
-            <marker date="1540972779558" expanded="true" signature="20288:20372" ph="..." />
+            <element signature="e#16390#17881#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -989,16 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/mongo_models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1957">
-          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/master_server/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -1051,8 +1012,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/master/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
+        <state relative-caret-position="587">
           <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="e#630#658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/mongo_models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="160" column="30" lean-forward="false" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1060,44 +1065,73 @@
     <entry file="file://$PROJECT_DIR$/master_server/collect_info_to_mq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
-          <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
+    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="65" />
+        <state relative-caret-position="155">
+          <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_info_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_tree_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#93#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        <state relative-caret-position="133">
+          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
+    <entry file="file://$PROJECT_DIR$/check_tools/get_cal_info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="36" column="38" lean-forward="true" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="330">
+          <caret line="104" column="20" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
+          <folding>
+            <element signature="e#15#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/maintain_programs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="732">
-          <caret line="579" column="7" lean-forward="true" selection-start-line="579" selection-start-column="7" selection-end-line="579" selection-end-column="7" />
+        <state relative-caret-position="417">
+          <caret line="569" column="4" lean-forward="false" selection-start-line="569" selection-start-column="4" selection-end-line="569" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#863#1867#0" expanded="false" />
             <element signature="e#1931#2884#0" expanded="false" />
-            <element signature="e#2943#4408#0" expanded="false" />
             <element signature="e#4431#4908#0" expanded="false" />
             <element signature="e#4941#6471#0" expanded="false" />
             <element signature="e#6506#7353#0" expanded="false" />
@@ -1108,47 +1142,15 @@
             <element signature="e#14753#15078#0" expanded="false" />
             <element signature="e#15117#15334#0" expanded="false" />
             <element signature="e#15370#15483#0" expanded="false" />
-            <element signature="e#15545#16342#0" expanded="false" />
-            <element signature="e#16389#17880#0" expanded="false" />
-            <marker date="1540972779558" expanded="true" signature="20288:20372" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-          <folding>
-            <element signature="e#630#658#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="152" column="17" lean-forward="true" selection-start-line="152" selection-start-column="17" selection-end-line="152" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_tools/get_cal_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="95" column="21" lean-forward="true" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
-          <folding>
-            <element signature="e#15#24#0" expanded="true" />
+            <element signature="e#16390#17881#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/restart_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="627">
+          <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>

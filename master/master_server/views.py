@@ -13,6 +13,9 @@ from master_server.packages.mysql_sync_result import MysqlSyncLog
 from master_server.packages.log_module import result_reader
 
 from check_tools.get_cal_info import GetCalInfo
+from check_tools.tools import slave_exec_api
+from datetime import datetime
+
 # Create your views here.
 
 
@@ -152,4 +155,18 @@ class GetCalResult(View):
     def get(self, request, pk=None):
         g = GetCalInfo(pk)
         return HttpResponse(g())
+
+
+class ExecApi(View):
+    def get(self, request, sid):
+        if 'date_time' in request.GET:
+            date_str = request.GET['date']
+        else:
+            date_today = datetime.now()
+            date_today = date_today.strftime('%Y-%m-%d')
+            date_str = date_today
+        a = slave_exec_api(sid=sid, version=date_str)
+        return HttpResponse(a)
+
+
 

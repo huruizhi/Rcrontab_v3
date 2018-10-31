@@ -28,5 +28,7 @@ urlpatterns = [
     path('program/status/<option>/', ProgramStatusCheck.as_view()),
     path('slave_program_result/', SlaveProgramResult.as_view()),
     path('sync_result/', SyncResult.as_view()),
-    path('get_cal_result//', GetCalResult.as_view())
+    path('get_cal_result/<pk>/', GetCalResult.as_view()),
+    path('get_cal_result/', GetCalResult.as_view()),
+    path('exec_api/<sid>/', ExecApi.as_view()),
 ]

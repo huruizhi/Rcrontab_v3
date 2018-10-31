@@ -6,7 +6,6 @@ class EventProduct:
         connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.157'))
         self.channel = connection.channel()
         self.exchange = exchange
-
         # 广播消息
         self.channel.exchange_declare(exchange=self.exchange, exchange_type='fanout')
 

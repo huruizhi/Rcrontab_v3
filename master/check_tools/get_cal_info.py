@@ -14,6 +14,7 @@ from master_server.collect_info_to_mq import SendProgramStatus
 from datetime import datetime
 from master_server.packages.mysql_sync_result import MysqlSyncLog
 
+
 class GetCalInfo:
     def __init__(self, pk=None):
         self.all_project = list()
@@ -24,21 +25,21 @@ class GetCalInfo:
         server = ServerInfo.objects.all()
         result_str = ""
         for s_info in server:
-            if '阿里' in s_info.name:
+            if '阿里' in s_info.name or '基础算法' in s_info.name:
                 self.all_project.append(s_info.pk)
-                result_str = result_str + " {pk} {name} \n".format(pk=s_info.pk, name=s_info.name)
+                result_str = result_str + " {pk} {name} <br>\n".format(pk=s_info.pk, name=s_info.name)
         return result_str
 
     def _get_modules(self, re_run=False):
         programs = PyScriptBaseInfoV2.objects.filter(path__server__pk=self.server_pk).filter(program_type=1)
         result_str = ""
         for p in programs:
-            result_str = result_str + "{pk}, {name}, {function} \n".format(pk=p.pk, name=p.name, function=p.function)
+            result_str = result_str + "{pk}, {name}, {function} <br>\n".format(pk=p.pk, name=p.name, function=p.function)
             result = self._get_sync_miss_table(p.pk)
             if result == 'success':
-                result_str = result_str + 'success \n'
+                result_str = result_str + 'success <br>\n'
             else:
-                result_str = result_str + json.dumps(result)
+                result_str = result_str + json.dumps(result) + '<br> <br>\n'
                 if re_run is True:
                     self._re_run_program(result)
 
@@ -62,7 +63,15 @@ class GetCalInfo:
             p_v_info = json.loads(p_v.to_json())
             return p_v_info
         else:
-            return 'success'
+            running_start_hash = p_v['running_start']
+            running_end_hash = p_v['running_end']
+            e_start = EventsHub.objects.get(hash_id=running_start_hash)
+            e_end = EventsHub.objects.get(hash_id=running_end_hash)
+
+            start_time = e_start.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
+            end_time = e_end.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
+
+            return "start_time:{start_time}, end_time:{end_time} <br><br> \n".format(start_time=start_time, end_time=end_time)
 
     def _re_run_program(self, p_v_info):
         pre_tables = p_v_info['pre_tables']
@@ -93,6 +102,6 @@ class GetCalInfo:
 
 
 if __name__ == '__main__':
-    g = GetCalInfo(7)
+    g = GetCalInfo(1)
     result_string = g()
     print(result_string)

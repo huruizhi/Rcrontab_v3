@@ -469,7 +469,7 @@ def flush_program(start_hour, end_hour, version=None):
                 finally:
                     if status:
                         break
-            sleep(5)
+            sleep(60)
 
 
 def send_program_ok(sid, version=None):
@@ -566,8 +566,8 @@ if __name__ == "__main__":
     """
     获取树结构
     """
-    # get_cron_tree(715, 3)
-    # get_cal_tree(771, 10)
+    # get_cron_tree(757, 3)
+    get_cal_tree(757, 10)
     # get_cal_tree(671, 10)
 
 
@@ -580,9 +580,9 @@ if __name__ == "__main__":
     """
     表结果更新
     """
-    tid = [3324]
-    for t in tid:
-        table_success(t)
+    # tid = [3324]
+    # for t in tid:
+    #     table_success(t)
 
     """
     重新调用程序
