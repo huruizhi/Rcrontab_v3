@@ -6,7 +6,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "master.settings")
 django.setup()
 
-from master_server.mongo_models import EventsHub, TableVersionTree, TableInfo, CalProgramInfo, CalVersionTree
+from master_server.mongo_models import EventsHub, CalProgramInfo, CalVersionTree, \
+    CronProgramInfo, CronProgramVersionTree
 from master_server.models import TablesInfo, PyScriptBaseInfoV2, Path, ServerInfo
 import json
 from master_server.packages.hash import get_hash
@@ -23,7 +24,8 @@ class GetCalInfo:
 
     def _print_project(self):
         server = ServerInfo.objects.all()
-        result_str = ""
+        result_str = " 0 计划任务 <br> \n"
+
         for s_info in server:
             if '阿里' in s_info.name or '基础算法' in s_info.name:
                 self.all_project.append(s_info.pk)
@@ -31,17 +33,20 @@ class GetCalInfo:
         return result_str
 
     def _get_modules(self, re_run=False):
-        programs = PyScriptBaseInfoV2.objects.filter(path__server__pk=self.server_pk).filter(program_type=1)
+        if self.server_pk == 0:
+            programs_type = 'cron'
+            programs = PyScriptBaseInfoV2.objects.filter(program_type=0).filter(is_stop=0)
+        else:
+            programs_type = 'cal'
+            programs = PyScriptBaseInfoV2.objects.filter(path__server__pk=self.server_pk).filter(program_type=1).\
+                filter(is_stop=0)
         result_str = ""
         for p in programs:
-            result_str = result_str + "{pk}, {name}, {function} <br>\n".format(pk=p.pk, name=p.name, function=p.function)
-            result = self._get_sync_miss_table(p.pk)
-            if result == 'success':
-                result_str = result_str + 'success <br>\n'
-            else:
-                result_str = result_str + json.dumps(result) + '<br> <br>\n'
-                if re_run is True:
-                    self._re_run_program(result)
+            result_str = result_str + "{pk}, {name}, {function}<br>\n".format(pk=p.pk, name=p.name, function=p.function)
+            result = self._get_sync_miss_table(p.pk, programs_type)
+            result_str = result_str + result + '<br> <br>\n'
+            if re_run is True:
+                self._re_run_program(result)
 
         if re_run is True:
             self._table_success()
@@ -56,12 +61,19 @@ class GetCalInfo:
 
 
     @staticmethod
-    def _get_sync_miss_table(sid):
-        p = CalProgramInfo.objects.get(sid=sid)
-        p_v = CalVersionTree.objects.get(hash_id=p.pointer)
+    def _get_sync_miss_table(sid, programs_type):
+        if programs_type == 'cal':
+            program_info = CalProgramInfo
+            version_tree = CalVersionTree
+        else:
+            program_info = CronProgramInfo
+            version_tree = CronProgramVersionTree
+
+        p = program_info.objects.get(sid=sid)
+        p_v = version_tree.objects.get(hash_id=p.pointer)
         if p_v.pre_version == 'init':
             p_v_info = json.loads(p_v.to_json())
-            return p_v_info
+            return json.dumps(p_v_info)
         else:
             try:
                 p_p_v = EventsHub.objects.get(hash_id=p_v.pre_version)
@@ -107,6 +119,6 @@ class GetCalInfo:
 
 
 if __name__ == '__main__':
-    g = GetCalInfo(1)
+    g = GetCalInfo(0)
     result_string = g()
     print(result_string)

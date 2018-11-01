@@ -1,8 +1,32 @@
-## 文件更新窗口期
-#### 更新时间
-03:00 pm - 06:00 pm
+## 使用说明
 
-#### 说明
+### master使用说明
 
-在非窗口期更新程序可能会产生部分程序未正常结束的异常状态未检测到的情况。
+- 启动
 
+http://192.168.0.157:3851/master_server/start/
+
+- 后台
+
+http://192.168.0.157:3851/admin/
+
+- 依赖关系查询
+
+http://192.168.0.157:3851/master_server/program/status/parent_son/?sid=<sid>
+
+- 调度查询
+
+http://192.168.0.157:3851/master_server/get_cal_result/
+
+- 调度执行
+
+http://192.168.0.157:3851/master_server/exec_api/<sid>/
+
+- 添加执行计划
+
+http://192.168.0.157:3851/master_server/add_program/
+
+
+### slave使用说明
+
+http://<slave ip>:<slave 端口>/slave_server/start/

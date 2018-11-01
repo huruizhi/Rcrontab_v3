@@ -105,7 +105,6 @@ class CronObj:
         except Exception as e:
             logging("{name}:{err}".format(name=__name__, err=str(e)))
         finally:
-            sleep(1)
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
     #  异常退出

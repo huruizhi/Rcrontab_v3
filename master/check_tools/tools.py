@@ -574,7 +574,7 @@ if __name__ == "__main__":
     """
     获取依赖关系
     """
-    a = GetParentSon(466)
+    # a = GetParentSon(466)
     # a = GetParentSon(651)
 
     """
@@ -588,9 +588,9 @@ if __name__ == "__main__":
     重新调用程序
     """
 
-    # for i in [639]:
-    #     a = slave_exec_api(i, date_today)
-    #     print(a)
+    for i in [801]:
+        a = slave_exec_api(i, date_today)
+        print(a)
 
 
     # a = slave_exec_api(324, 'http://192.168.0.157:3555/macro_v2/bondManagerController/usdCnyIndexDay?version=2018-05-25&sid=324')
