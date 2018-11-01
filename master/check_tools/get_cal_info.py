@@ -43,6 +43,10 @@ class GetCalInfo:
         result_str = ""
         for p in programs:
             result_str = result_str + "{pk}, {name}, {function}<br>\n".format(pk=p.pk, name=p.name, function=p.function)
+            if self.server_pk == 0:
+                result_str = result_str + "{pk}, {name}, {cron}, " \
+                                          "{function} <br>\n".format(pk=p.pk, name=p.name, function=p.function,
+                                                                     cron=p.cron)
             result = self._get_sync_miss_table(p.pk, programs_type)
             result_str = result_str + result + '<br> <br>\n'
             if re_run is True:
