@@ -148,6 +148,13 @@ class CalTreeObj:
         self._update_info()
         self.del_end_scheduler()
 
+    # 程序开始miss
+    def running_miss_start(self, event_hash_id):
+        self.info_dict['status'] = 4
+        self.info_dict['running_start'] = event_hash_id
+        self._update_info()
+        self.del_end_scheduler()
+
     # 没有返回执行结果
     def running_end_miss(self, event_hash_id):
         # 更新info信息
@@ -215,13 +222,6 @@ class CalTreeObj:
                 pre_tables_dict = {str(table): ''}
             self.info_dict['pre_tables'] = pre_tables_dict
             self._update_info()
-
-    # 程序开始miss
-    def running_miss_start(self, event_hash_id):
-        self.info_dict['status'] = 4
-        self.info_dict['running_start'] = event_hash_id
-        self._update_info()
-        self.del_end_scheduler()
 
     # 判断程序是否在正在执行
     def is_running(self):

@@ -33,5 +33,5 @@ class TableEventProduct:
 
 if __name__ == '__main__':
     a = TableEventProduct()
-    a.broadcast_message('aaaaa')
+    a.broadcast_message('')
     a.close()

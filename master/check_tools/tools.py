@@ -567,14 +567,14 @@ if __name__ == "__main__":
     获取树结构
     """
     # get_cron_tree(757, 3)
-    get_cal_tree(757, 10)
+    # get_cal_tree(757, 10)
     # get_cal_tree(671, 10)
 
 
     """
     获取依赖关系
     """
-    # a = GetParentSon(771)
+    a = GetParentSon(466)
     # a = GetParentSon(651)
 
     """

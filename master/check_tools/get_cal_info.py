@@ -63,15 +63,20 @@ class GetCalInfo:
             p_v_info = json.loads(p_v.to_json())
             return p_v_info
         else:
-            running_start_hash = p_v['running_start']
-            running_end_hash = p_v['running_end']
-            e_start = EventsHub.objects.get(hash_id=running_start_hash)
-            e_end = EventsHub.objects.get(hash_id=running_end_hash)
+            try:
+                p_p_v = EventsHub.objects.get(hash_id=p_v.pre_version)
+                p_p_v_info = p_p_v.to_json()
+                running_start_hash = p_p_v_info['running_start']
+                running_end_hash = p_p_v_info['running_end']
+                e_start = EventsHub.objects.get(hash_id=running_start_hash)
+                e_end = EventsHub.objects.get(hash_id=running_end_hash)
 
-            start_time = e_start.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
-            end_time = e_end.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
+                start_time = e_start.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
+                end_time = e_end.occur_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
-            return "start_time:{start_time}, end_time:{end_time} <br><br> \n".format(start_time=start_time, end_time=end_time)
+                return "start_time:{start_time}, end_time:{end_time} <br><br> \n".format(start_time=start_time, end_time=end_time)
+            except Exception as e:
+                return 'success'
 
     def _re_run_program(self, p_v_info):
         pre_tables = p_v_info['pre_tables']

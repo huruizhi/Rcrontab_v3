@@ -159,13 +159,13 @@ class GetCalResult(View):
 
 class ExecApi(View):
     def get(self, request, sid):
-        if 'date_time' in request.GET:
-            date_str = request.GET['date']
+        if 'version' in request.GET:
+            version = request.GET['version']
         else:
             date_today = datetime.now()
             date_today = date_today.strftime('%Y-%m-%d')
-            date_str = date_today
-        a = slave_exec_api(sid=sid, version=date_str)
+            version = date_today
+        a = slave_exec_api(sid=sid, version=version)
         return HttpResponse(a)
 
 
