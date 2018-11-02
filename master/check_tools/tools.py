@@ -588,7 +588,7 @@ if __name__ == "__main__":
     重新调用程序
     """
 
-    for i in [801]:
+    for i in [503]:
         a = slave_exec_api(i, date_today)
         print(a)
 

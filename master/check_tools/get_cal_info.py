@@ -42,13 +42,15 @@ class GetCalInfo:
                 filter(is_stop=0)
         result_str = ""
         for p in programs:
-            result_str = result_str + "{pk}, {name}, {function}<br>\n".format(pk=p.pk, name=p.name, function=p.function)
             if self.server_pk == 0:
                 result_str = result_str + "{pk}, {name}, {cron}, " \
                                           "{function} <br>\n".format(pk=p.pk, name=p.name, function=p.function,
                                                                      cron=p.cron)
+            else:
+                result_str = result_str + "{pk}, {name}, {function} <br>\n".format(pk=p.pk, name=p.name,
+                                                                                   function=p.function)
             result = self._get_sync_miss_table(p.pk, programs_type)
-            result_str = result_str + result + '<br> <br>\n'
+            result_str = result_str + json.dumps(result) + '<br> <br>\n'
             if re_run is True:
                 self._re_run_program(result)
 
@@ -77,7 +79,7 @@ class GetCalInfo:
         p_v = version_tree.objects.get(hash_id=p.pointer)
         if p_v.pre_version == 'init':
             p_v_info = json.loads(p_v.to_json())
-            return json.dumps(p_v_info)
+            return p_v_info
         else:
             try:
                 p_p_v = EventsHub.objects.get(hash_id=p_v.pre_version)
@@ -95,6 +97,8 @@ class GetCalInfo:
                 return 'success'
 
     def _re_run_program(self, p_v_info):
+        if isinstance(p_v_info, str):
+            return True
         pre_tables = p_v_info['pre_tables']
         for tid in pre_tables:
             if not pre_tables[tid]:
