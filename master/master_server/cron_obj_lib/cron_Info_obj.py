@@ -1,7 +1,10 @@
 from master_server.mongo_models import CronProgramInfo
 from master_server.models import ServerInfo
 from urllib import request, parse
-from master_server.schedulers.schedulers import Scheduler
+from check_tools.tools import slave_exec_api
+from sevice_start import ThreadManage
+Scheduler = ThreadManage.Scheduler
+from datetime import datetime
 
 
 class CronInfoObj:
@@ -39,6 +42,13 @@ class CronInfoObj:
 
         # # 将程序加入定时器
         Scheduler.add_job_info(sid=self.sid, cron_str=self.info_dict['cron'])
+
+    def exec_api(self):
+        date_today = datetime.now()
+        date_today = date_today.strftime('%Y-%m-%d')
+        status, result = slave_exec_api(self.sid, date_today, subversion=True)
+        if status is True:
+            
 
     # 数据改变
     def info_change(self,  sid, pre_tables, result_tables, cron, api, hash_ack):

@@ -20,6 +20,7 @@ import json
 from master_server.packages.event_product import EventProduct
 from time import sleep
 from master_server.packages.mysql_sync_result import MysqlSyncLog
+import traceback
 
 
 class MysqlSync:
@@ -86,7 +87,10 @@ def slave_exec_api(sid, version, subversion=False):
     #     subversion = int(time.time()) * 1000
     p = PyScriptBaseInfoV2.objects.get(sid=sid)
     api = '{0}{1}'.format(p.path.path, p.name)
-    subversion = int(time.time()) * 1000
+    if subversion is True:
+        subversion = int(time.time()) * 1000
+    else:
+        subversion = None
     parameter_str_1 = "?sid={sid}&version={version}&subversion={subversion}".format(sid=sid,
                                                                                     version=version,
                                                                                     subversion=subversion)
@@ -110,18 +114,16 @@ def slave_exec_api(sid, version, subversion=False):
         ip = server.ip
         port = server.port
         url = "http://{ip}:{port}/slave_server/exec_api/".format(ip=ip, port=port)
-        print(url)
     except Exception as e:
-        url = 'Can not find server ip port!'
-        return url
+        return False, traceback.format_exc()
     try:
         data = parse.urlencode(data).encode('utf-8')
         req = request.Request(url, data=data)
         page = request.urlopen(req).read()
         page = page.decode('utf-8')
-        return page
+        return True, page
     except Exception as e:
-        return e
+        return False, traceback.format_exc()
 
 
 def exec_sql():

@@ -1,10 +1,12 @@
 from master_server.mongo_models import CalVersionTree, EventsHub, TableInfo, TableVersionTree
 from master_server.packages.hash import get_hash
-from master_server.schedulers.schedulers import Scheduler
+from sevice_start import ThreadManage
 from master_server.packages.log_module import cal_log
 import json
 from datetime import timedelta, datetime
 from master_server.models import PyScriptBaseInfoV2, TablesInfo
+
+Scheduler = ThreadManage.Scheduler
 
 
 class CalTreeObj:

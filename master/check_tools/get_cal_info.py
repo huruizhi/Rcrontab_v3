@@ -10,8 +10,6 @@ from master_server.mongo_models import EventsHub, CalProgramInfo, CalVersionTree
     CronProgramInfo, CronProgramVersionTree
 from master_server.models import TablesInfo, PyScriptBaseInfoV2, Path, ServerInfo
 import json
-from master_server.packages.hash import get_hash
-from master_server.collect_info_to_mq import SendProgramStatus
 from datetime import datetime
 from master_server.packages.mysql_sync_result import MysqlSyncLog
 
@@ -55,6 +53,7 @@ class GetCalInfo:
                 self._re_run_program(result)
 
         if re_run is True:
+            print(self.table_list)
             self._table_success()
         return result_str
 
@@ -127,6 +126,6 @@ class GetCalInfo:
 
 
 if __name__ == '__main__':
-    g = GetCalInfo(0)
+    g = GetCalInfo()
     result_string = g()
     print(result_string)

@@ -5,12 +5,13 @@ import pytz
 from master_server.collect_info_to_mq import SendProgramStatus
 from apscheduler.executors.pool import ThreadPoolExecutor
 from master_server.packages.hash import get_hash
-from datetime import datetime, timedelta
+from datetime import datetime
 from time import sleep
-from master_server.models import TablesInfo
 from django.db import connection
 from master_server.packages.log_module import scheduler_log
 from master_server.packages.quality_control_new import QualityControl
+
+
 
 '''
     hash_id = mn.StringField(max_length=16, required=True, Unique=True)
@@ -24,15 +25,15 @@ from master_server.packages.quality_control_new import QualityControl
 '''
 
 
-def _get_url(sid):
-    # 设置五分钟为超时时间
-    date_time = datetime.now() + timedelta(minutes=5)
-    hash_id = "{sid}_start".format(sid=sid)
-    Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='start', sid=sid)
-
-    date_time = datetime.now() + timedelta(hours=3)
-    hash_id = "{sid}_end".format(sid=sid)
-    Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='end', sid=sid)
+# def _get_url(sid):
+#     # 设置五分钟为超时时间
+#     date_time = datetime.now() + timedelta(minutes=5)
+#     hash_id = "{sid}_start".format(sid=sid)
+#     Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='start', sid=sid)
+#
+#     date_time = datetime.now() + timedelta(hours=3)
+#     hash_id = "{sid}_end".format(sid=sid)
+#     Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='end', sid=sid)
 
 
 # 超时事件发送
@@ -62,29 +63,29 @@ def send_program_status(sid, status, subversion=None):
         sleep(20)
 
 
-# 人工输入表插入table_events exchange
-def manual_update_table_events():
-    if not is_connection_usable():
-        connection.close()
-
-    # 刷新表
-    update_table_data_source()
-    tables = TablesInfo.objects.filter(data_source=1).filter(db_server='db_153')
-    tables_list = list()
-
-    for t in tables:
-        tables_list.append(t.pk)
-    for tid in tables_list:
-        occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        version = datetime.now().strftime('%Y-%m-%d')
-        event_info = {'tid': tid, 'type': 103,
-                      'info': 'manual_table_with_out QC',
-                      'occur_datetime': occur_datetime,
-                      'version': version,
-                      'source': "manual_update"}
-        hash_id = get_hash(event_info)
-        event_info['hash_id'] = hash_id
-        SendProgramStatus(message=event_info, msg_type='t').send_msg()
+# # 人工输入表插入table_events exchange
+# def manual_update_table_events():
+#     if not is_connection_usable():
+#         connection.close()
+#
+#     # 刷新表
+#     update_table_data_source()
+#     tables = TablesInfo.objects.filter(data_source=1).filter(db_server='db_153')
+#     tables_list = list()
+#
+#     for t in tables:
+#         tables_list.append(t.pk)
+#     for tid in tables_list:
+#         occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#         version = datetime.now().strftime('%Y-%m-%d')
+#         event_info = {'tid': tid, 'type': 103,
+#                       'info': 'manual_table_with_out QC',
+#                       'occur_datetime': occur_datetime,
+#                       'version': version,
+#                       'source': "manual_update"}
+#         hash_id = get_hash(event_info)
+#         event_info['hash_id'] = hash_id
+#         SendProgramStatus(message=event_info, msg_type='t').send_msg()
 
 
 def update_table_data_source():
@@ -118,7 +119,7 @@ def is_connection_usable():
         return True
 
 
-class _Scheduler:
+class SchedulerLib:
     def __init__(self):
         jobstores = {
             'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite'),
@@ -162,10 +163,10 @@ class _Scheduler:
                                         name="{sid}: {status} deadline".format(sid=sid, status=status),
                                         args=[sid, status, subversion], replace_existing=True)
 
-    def add_manual_update_table(self):
-        self._scheduler.add_job(manual_update_table_events, 'cron', minute='00',
-                                hour='20', day='*', month='*', day_of_week='*',
-                                id='manual', name='manual_update_table', replace_existing=True, misfire_grace_time=300)
+    # def add_manual_update_table(self):
+    #     self._scheduler.add_job(manual_update_table_events, 'cron', minute='00',
+    #                             hour='20', day='*', month='*', day_of_week='*',
+    #                            id='manual', name='manual_update_table', replace_existing=True, misfire_grace_time=300)
 
     def remove_job(self, job_id):
         try:
@@ -189,9 +190,6 @@ class _Scheduler:
     def get_job(self, job_id):
         return self._scheduler.get_job(job_id=job_id)
 
-
-Scheduler = _Scheduler()
-Scheduler.add_manual_update_table()
 
 if __name__ == '__main__':
     url_1 = "http://192.168.0.157:3502/bond_v2/bond/PyBondShanghaiExchangeBaseInfo21"

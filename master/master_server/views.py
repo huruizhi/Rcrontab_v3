@@ -1,8 +1,6 @@
 from django.shortcuts import HttpResponse, render
 from django.views import View
 import json
-from master_server.cron_obj_lib.maintain_programs import MaintainProgram
-from master_server.schedulers.schedulers import Scheduler
 from sevice_start import ThreadManage
 from master_server.packages.read_program_base_info import ReadProgramsInfo
 from . import forms
@@ -17,6 +15,7 @@ from check_tools.tools import slave_exec_api
 from datetime import datetime
 
 # Create your views here.
+Scheduler = ThreadManage.Scheduler
 
 
 class CheckStatus(View):
@@ -56,7 +55,7 @@ class DelExecPlan(View):
         if 'sid' in request.GET:
             sid = request.GET['sid']
             print(sid)
-            if MaintainProgram.delete_obj(sid=sid):
+            if ThreadManage.MaintainProgram.delete_obj(sid=sid):
                 return HttpResponse("cron_program:{sid} delete successful!".format(sid=sid))
             else:
                 return HttpResponse("cron_program:{sid} is not in schedulers!".format(sid=sid))
@@ -103,7 +102,7 @@ class SendExecPlan(View):
     """
     def get(self, request):
         try:
-            MaintainProgram.send_exec_plan()
+            ThreadManage.MaintainProgram.send_exec_plan()
             page = 'send exec plan ok!'
         except Exception as e:
             page = str(e)
