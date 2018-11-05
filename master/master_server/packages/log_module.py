@@ -40,4 +40,6 @@ mysql_sync = WriteLogManage('mysql_sync_api')
 mysql_sync_result_reader = WriteLogManage('mysql_sync_result_reader')
 scheduler_log = WriteLogManage('scheduler_log')
 quality_control = WriteLogManage('quality_control')
+mq_err = WriteLogManage('mq_err')
+
 

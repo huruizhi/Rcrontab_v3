@@ -174,9 +174,10 @@ class CronObj:
         del self.cron_tree_obj
 
     def _broadcast_result(self):
-        result_tables = self.cron_info_obj.info_dict['result_tables']
+        result_tables = TablesInfo.objects.filter(father_program__sid=self.sid)
         for tid in result_tables:
-            mysql_sync_func(tid)
+            thread = Thread(target=mysql_sync_func, args=(tid.pk,))
+            thread.start()
 
 
 

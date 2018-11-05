@@ -1,6 +1,9 @@
 from master_server.mongo_models import EventsHub
 import json
 from master_server.packages.event_product import EventProduct, TableEventProduct
+from master_server.packages.log_module import mq_err
+import traceback
+from time import sleep
 
 """
 将程序 和表 的的状态信息 写入rabbitMQ 和 mongodb EventHub
@@ -18,19 +21,21 @@ class SendProgramStatus:
     def send_msg(self):
         if not self.msg_type:
             return
-        try:
-            data = json.dumps(self.msg)
-            if self.msg_type == 'p':
-                event_product = EventProduct()
-            else:
-                event_product = TableEventProduct()
-            event_hub = EventsHub(**self.msg)
-            event_hub.save()
-            event_product.broadcast_message(data)
-            event_product.close()
-            return True
-        except Exception as e:
-            return False
+        while True:
+            try:
+                data = json.dumps(self.msg)
+                if self.msg_type == 'p':
+                    event_product = EventProduct()
+                else:
+                    event_product = TableEventProduct()
+                event_hub = EventsHub(**self.msg)
+                event_hub.save()
+                event_product.broadcast_message(data)
+                event_product.close()
+                return True
+            except Exception as e:
+                sleep(10)
+                mq_err.error(traceback.format_exc())
 
 
 if __name__ == '__main__':

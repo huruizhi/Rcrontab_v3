@@ -37,9 +37,9 @@ class MysqlSyncLog:
                       'source': "153-ali_sync"}
         hash_id = get_hash(event_info)
         event_info['hash_id'] = hash_id
+        SendProgramStatus(message=event_info, msg_type='t').send_msg()
         event = EventsHub(**event_info)
         event.save()
-        SendProgramStatus(message=event_info, msg_type='t').send_msg()
 
     @staticmethod
     def _get_version(table, db):

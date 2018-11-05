@@ -127,6 +127,6 @@ class GetCalInfo:
 
 
 if __name__ == '__main__':
-    g = GetCalInfo(0)
+    g = GetCalInfo(1)
     result_string = g()
     print(result_string)

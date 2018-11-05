@@ -469,7 +469,7 @@ def flush_program(start_hour, end_hour, version=None):
                 finally:
                     if status:
                         break
-            sleep(60)
+            sleep(5)
 
 
 def send_program_ok(sid, version=None):
@@ -561,12 +561,12 @@ if __name__ == "__main__":
     # mysql_table('db_153')
     # flush_program(15, 15, date_today)
     # flush_program(0, 9, date_today)
-    # send_program_ok(651, '2018-08-16')
+    # send_program_ok(378, '2018-11-05')
 
     """
     获取树结构
     """
-    # get_cron_tree(757, 3)
+    # get_cron_tree(312, 3)
     # get_cal_tree(757, 10)
     # get_cal_tree(671, 10)
 
@@ -574,23 +574,23 @@ if __name__ == "__main__":
     """
     获取依赖关系
     """
-    # a = GetParentSon(466)
+    # a = GetParentSon(217)
     # a = GetParentSon(651)
 
     """
     表结果更新
     """
-    # tid = [3324]
-    # for t in tid:
-    #     table_success(t)
+    tid = [317, 312]
+    for t in tid:
+        table_success(t)
 
     """
     重新调用程序
     """
 
-    for i in [503]:
-        a = slave_exec_api(i, date_today)
-        print(a)
+    # for i in [401]:
+    #     a = slave_exec_api(i, date_today)
+    #     print(a)
 
 
     # a = slave_exec_api(324, 'http://192.168.0.157:3555/macro_v2/bondManagerController/usdCnyIndexDay?version=2018-05-25&sid=324')

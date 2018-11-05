@@ -11,6 +11,7 @@ from datetime import datetime
 from master_server.packages.slave_exec_api import slave_exec_api
 from master_server.models import TablesInfo
 from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
+import traceback
 
 
 class CalObj:
@@ -74,7 +75,8 @@ class CalObj:
     def table_events_listener(self):
         while True:
             try:
-                mq = ReceiveRabbitMQMessage(name=str(self.sid), target=self.table_callback, exchange='table_events')
+                name = "{sid}-t".format(sid=str(self.sid))
+                mq = ReceiveRabbitMQMessage(name=name, target=self.table_callback, exchange='table_events')
                 mq.start()
             except Exception as e:
                 time.sleep(30)
@@ -100,7 +102,7 @@ class CalObj:
                     if is_ok and not is_running:
                         self.exec_api(version)
         except Exception as e:
-            cal_log.error("{name}:{sid}:{err}".format(name=__name__, sid=self.sid, err=str(e)))
+            cal_log.error("{name}:{sid}:{err}".format(name=__name__, sid=self.sid, err=traceback.format_exc()))
         finally:
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -120,8 +122,7 @@ class CalObj:
     def program_events_listener(self):
         while True:
             try:
-                name = "{sid}-t".format(sid=str(self.sid))
-                mq = ReceiveRabbitMQMessage(name=name, target=self.program_callback)
+                mq = ReceiveRabbitMQMessage(name=str(self.sid), target=self.program_callback)
                 mq.start()
             except Exception as e:
                 time.sleep(30)
@@ -156,8 +157,8 @@ class CalObj:
             elif cal_tree_status == 1 and status == 5:
                 self.unusual_end(status=status, hash_id=hash_id)
                 self._broadcast_result()
-        except Exception as e:
-            cal_log.error("{name}:{err}".format(name=__name__, err=str(e)))
+        except Exception:
+            cal_log.error("{name}:{sid}:{err}".format(name=__name__,sid=self.sid ,err=traceback.format_exc()))
         finally:
             time.sleep(1)
             ch.basic_ack(delivery_tag=method.delivery_tag)
@@ -217,8 +218,9 @@ class CalObj:
         self._create_new_tree_obj()
 
     def _broadcast_result(self):
-        result_tables = self.cal_info_obj.info_dict['result_tables']
+        result_tables = TablesInfo.objects.filter(father_program__sid=self.sid)
         for tid in result_tables:
-            mysql_sync_func(tid)
+            thread = Thread(target=mysql_sync_func, args=(tid.pk,))
+            thread.start()
 
 

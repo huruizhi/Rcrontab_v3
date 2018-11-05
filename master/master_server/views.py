@@ -1,7 +1,6 @@
 from django.shortcuts import HttpResponse, render
 from django.views import View
 import json
-from master_server.cron_obj_lib.maintain_programs import MaintainProgram
 from master_server.schedulers.schedulers import Scheduler
 from sevice_start import ThreadManage
 from master_server.packages.read_program_base_info import ReadProgramsInfo
@@ -99,7 +98,7 @@ class SendExecPlan(View):
     """
     def get(self, request):
         try:
-            MaintainProgram.send_exec_plan()
+            ThreadManage.maintain_cron.send_exec_plan()
             page = 'send exec plan ok!'
         except Exception as e:
             page = str(e)
