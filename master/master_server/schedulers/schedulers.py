@@ -26,7 +26,7 @@ from master_server.packages.quality_control_new import QualityControl
 
 def _get_url(sid):
     # 设置五分钟为超时时间
-    date_time = datetime.now() + timedelta(minutes=5)
+    date_time = datetime.now() + timedelta(minutes=10)
     hash_id = "{sid}_start".format(sid=sid)
     Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='start', sid=sid)
 
@@ -191,7 +191,7 @@ class _Scheduler:
 
 
 Scheduler = _Scheduler()
-Scheduler.add_manual_update_table()
+# Scheduler.add_manual_update_table()
 
 if __name__ == '__main__':
     url_1 = "http://192.168.0.157:3502/bond_v2/bond/PyBondShanghaiExchangeBaseInfo21"

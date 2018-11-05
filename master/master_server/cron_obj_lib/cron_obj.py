@@ -3,10 +3,11 @@ from master_server.cron_obj_lib.cron_Info_obj import CronInfoObj
 from master_server.cron_obj_lib.cron_tree_obj import CronTreeObj
 from master_server.packages.receive import ReceiveRabbitMQMessage
 from master_server.packages.log_module import WriteLog
+from master_server.models import TablesInfo
 import json
 from threading import Thread
 from time import sleep
-from master_server.packages.event_product import EventProduct
+from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
 
 
 class CronObj:
@@ -94,14 +95,14 @@ class CronObj:
             elif cron_tree_status == 1 and status in (2, 3):
                 subversion = log_dict['subversion']
                 self.running_end_event(status=status, hash_id=hash_id, subversion=subversion)
-                self._broadcast_result(body)
+                self._broadcast_result()
             elif cron_tree_status == 0 and status == 4:
                 self.unusual_end(status=status, hash_id=hash_id)
-                self._broadcast_result(body)
+                self._broadcast_result()
             elif status == 5:
                 subversion = log_dict['subversion']
                 self.unusual_end(status=status, hash_id=hash_id, subversion=subversion)
-                self._broadcast_result(body)
+                self._broadcast_result()
         except Exception as e:
             logging("{name}:{err}".format(name=__name__, err=str(e)))
         finally:
@@ -172,8 +173,10 @@ class CronObj:
         del self.cron_info_obj
         del self.cron_tree_obj
 
-    def _broadcast_result(self, body):
-        event_product = EventProduct('result_event')
-        event_product.broadcast_message(message=body)
+    def _broadcast_result(self):
+        result_tables = self.cron_info_obj.info_dict['result_tables']
+        for tid in result_tables:
+            mysql_sync_func(tid)
+
 
 

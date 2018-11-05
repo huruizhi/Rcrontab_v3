@@ -120,5 +120,3 @@ class MaintainPrograms:
         for _, cron in self.cron_program_obj_dic.items():
             cron.cron_info_obj.send_exec_plan()
 
-
-MaintainProgram = MaintainPrograms()

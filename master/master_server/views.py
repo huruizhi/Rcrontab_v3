@@ -24,11 +24,7 @@ class CheckStatus(View):
     检查程序状态
     """
     def get(self, request, info_type):
-        if info_type == "send_mail":
-            check_mail = ThreadManage.check_mail()
-            check_mail_str = '<br>'.join(check_mail)
-            return HttpResponse(check_mail_str)
-        elif info_type == "threads":
+        if info_type == "threads":
             resp = ThreadManage.check()
             return HttpResponse(resp, content_type="application/json")
 

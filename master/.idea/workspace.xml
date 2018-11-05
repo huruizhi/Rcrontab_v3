@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="209">
-      <file leaf-file-name="restart_master.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/check_tools/restart_master.py">
+      <file leaf-file-name="maintain_programs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/maintain_programs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="36" column="20" lean-forward="true" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+            <state relative-caret-position="807">
+              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -39,8 +39,8 @@
       <file leaf-file-name="cron_obj.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_obj.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="175" column="32" lean-forward="false" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+            <state relative-caret-position="741">
+              <caret line="178" column="21" lean-forward="false" selection-start-line="178" selection-start-column="21" selection-end-line="178" selection-end-column="21" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -48,85 +48,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="event_product.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="83" lean-forward="false" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="83" />
+            <state relative-caret-position="210">
+              <caret line="96" column="7" lean-forward="true" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="READ_ME.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/READ_ME.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="589">
-                <caret line="31" column="27" lean-forward="false" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
-                <folding />
-              </first_editor>
-              <second_editor>
-                <markdownNavigatorState />
-              </second_editor>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="quality_control_new.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/packages/quality_control_new.py">
+      <file leaf-file-name="maintain_tables.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/maintain_tables.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1297">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="209">
+              <caret line="11" column="15" lean-forward="true" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
               <folding>
-                <element signature="e#0#14#0" expanded="true" />
-                <marker date="1533175061047" expanded="true" signature="472:512" ph="select table... regist_center" />
-                <marker date="1533175061047" expanded="true" signature="721:780" ph="select days delay_qc" />
+                <element signature="e#0#65#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/check_tools/tools.py">
+      <file leaf-file-name="sevice_start.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sevice_start.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="774">
-              <caret line="534" column="34" lean-forward="true" selection-start-line="534" selection-start-column="34" selection-end-line="534" selection-end-column="34" />
+            <state relative-caret-position="731">
+              <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
               <folding>
-                <element signature="e#863#1867#0" expanded="false" />
-                <element signature="e#1931#2884#0" expanded="false" />
-                <element signature="e#4431#4908#0" expanded="false" />
-                <element signature="e#4941#6471#0" expanded="false" />
-                <element signature="e#6506#7353#0" expanded="false" />
-                <element signature="e#7375#10209#0" expanded="false" />
-                <element signature="e#10236#13583#0" expanded="false" />
-                <element signature="e#14161#14476#0" expanded="false" />
-                <element signature="e#14514#14715#0" expanded="false" />
-                <element signature="e#14753#15078#0" expanded="false" />
-                <element signature="e#15117#15334#0" expanded="false" />
-                <element signature="e#15370#15483#0" expanded="false" />
-                <element signature="e#16390#17881#0" expanded="false" />
+                <element signature="e#0#73#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/master_server/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="20" column="49" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_cal_info.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/check_tools/get_cal_info.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -134,18 +85,56 @@
       <file leaf-file-name="cron_Info_obj.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_Info_obj.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            <state relative-caret-position="-637">
+              <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mongo_models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/master_server/mongo_models.py">
+      <file leaf-file-name="cal_obj.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1691">
-              <caret line="90" column="6" lean-forward="false" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
+            <state relative-caret-position="769">
+              <caret line="221" column="20" lean-forward="false" selection-start-line="221" selection-start-column="20" selection-end-line="221" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schedulers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/schedulers/schedulers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-651">
+              <caret line="121" column="23" lean-forward="true" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+                <marker date="1541389604953" expanded="true" signature="3318:3376" ph="UPDATE py_script_tables_info set... " />
+                <marker date="1541389604953" expanded="true" signature="3412:3632" ph="update py_script_tables_info a LE... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mysql_sync.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mysql_sync_result.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="31" column="46" lean-forward="false" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -163,8 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>641</find>
-      <find>656</find>
       <find>609</find>
       <find>status&quot;: 2</find>
       <find>504</find>
@@ -193,6 +180,8 @@
       <find>506</find>
       <find>506,</find>
       <find>456,</find>
+      <find>MysqlSyncLog</find>
+      <find>info_dict_new</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,7 +190,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/remote_db/loop_check_mysql_sync.py" />
         <option value="$PROJECT_DIR$/remote_db/Loop_check_program_result_log.py" />
         <option value="$PROJECT_DIR$/remote_db/tests.py" />
         <option value="$PROJECT_DIR$/remote_db/models.py" />
@@ -216,8 +204,6 @@
         <option value="$PROJECT_DIR$/remote_app_ali/Loop_check_program_result_log.py" />
         <option value="$PROJECT_DIR$/master_server/table_obj_lib/table_obj.py" />
         <option value="$PROJECT_DIR$/master_server/Loop_check_program_result_log.py" />
-        <option value="$PROJECT_DIR$/master_server/table_obj_lib/maintain_tables.py" />
-        <option value="$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py" />
         <option value="$PROJECT_DIR$/master_server/packages/log_module.py" />
         <option value="$PROJECT_DIR$/master_server/packages/quality_control.py" />
         <option value="$PROJECT_DIR$/master_server/packages/aaa_test.py" />
@@ -229,9 +215,6 @@
         <option value="$PROJECT_DIR$/check_tools/get_hist_info.py" />
         <option value="$PROJECT_DIR$/check_tools/get_parent_son.py" />
         <option value="$PROJECT_DIR$/master_server/packages/slave_program_result_log.py" />
-        <option value="$PROJECT_DIR$/sevice_start.py" />
-        <option value="$PROJECT_DIR$/master_server/packages/mysql_sync_result.py" />
-        <option value="$PROJECT_DIR$/master_server/schedulers/schedulers.py" />
         <option value="$PROJECT_DIR$/master/settings.py" />
         <option value="$PROJECT_DIR$/master_server/models.py" />
         <option value="$PROJECT_DIR$/master_server/packages/receive.py" />
@@ -242,16 +225,22 @@
         <option value="$PROJECT_DIR$/program_transfer/program_transfer.py" />
         <option value="$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/pymysql/err.py" />
         <option value="$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/django/db/backends/mysql/base.py" />
-        <option value="$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py" />
         <option value="$PROJECT_DIR$/master_server/urls.py" />
         <option value="$PROJECT_DIR$/master_server/packages/event_product.py" />
-        <option value="$PROJECT_DIR$/master_server/views.py" />
         <option value="$PROJECT_DIR$/master_server/cal_obj_lib/cal_tree_obj.py" />
-        <option value="$PROJECT_DIR$/master_server/cron_obj_lib/cron_obj.py" />
         <option value="$PROJECT_DIR$/check_tools/restart_master.py" />
         <option value="$PROJECT_DIR$/READ_ME.md" />
         <option value="$PROJECT_DIR$/check_tools/get_cal_info.py" />
         <option value="$PROJECT_DIR$/check_tools/tools.py" />
+        <option value="$PROJECT_DIR$/master_server/table_obj_lib/maintain_tables.py" />
+        <option value="$PROJECT_DIR$/master_server/cron_obj_lib/cron_obj.py" />
+        <option value="$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py" />
+        <option value="$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py" />
+        <option value="$PROJECT_DIR$/master_server/packages/mysql_sync_result.py" />
+        <option value="$PROJECT_DIR$/master_server/schedulers/schedulers.py" />
+        <option value="$PROJECT_DIR$/master_server/cron_obj_lib/maintain_programs.py" />
+        <option value="$PROJECT_DIR$/sevice_start.py" />
+        <option value="$PROJECT_DIR$/master_server/views.py" />
       </list>
     </option>
   </component>
@@ -299,8 +288,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -329,19 +318,19 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/apple/gitlab/rcrontab/master/master_server/schedulers/schedulers.py&#10;_set_&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/check_tools" />
-      <recent name="$PROJECT_DIR$/remote_app_ali" />
-      <recent name="$PROJECT_DIR$/remote_db" />
-      <recent name="$PROJECT_DIR$/master" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/master_server/packages" />
       <recent name="$PROJECT_DIR$/remote_app_ali" />
       <recent name="$PROJECT_DIR$/remote_db" />
       <recent name="$PROJECT_DIR$/remote_app_155" />
       <recent name="$PROJECT_DIR$/master_server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/check_tools" />
+      <recent name="$PROJECT_DIR$/remote_app_ali" />
+      <recent name="$PROJECT_DIR$/remote_db" />
+      <recent name="$PROJECT_DIR$/master" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -595,12 +584,12 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31600833" sideWeight="0.48189563" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3841642" sideWeight="0.31502423" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22661123" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22661123" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5093555" sideWeight="0.68659127" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.493763" sideWeight="0.81098545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14530386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20790021" sideWeight="0.68370605" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18366228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18366228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -622,12 +611,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3841642" sideWeight="0.31502423" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.512474" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22661123" sideWeight="0.68497574" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5093555" sideWeight="0.68659127" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.493763" sideWeight="0.81098545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14530386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20790021" sideWeight="0.68370605" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2383049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18366228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -680,51 +669,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py</url>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_tree_obj.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/check_tools/tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11400">
-          <caret line="600" column="32" lean-forward="false" selection-start-line="600" selection-start-column="32" selection-end-line="600" selection-end-column="32" />
-          <folding>
-            <element signature="e#863#1867#0" expanded="false" />
-            <element signature="e#1931#2884#0" expanded="false" />
-            <element signature="e#4431#4908#0" expanded="false" />
-            <element signature="e#4941#6471#0" expanded="false" />
-            <element signature="e#6506#7353#0" expanded="false" />
-            <element signature="e#7375#10209#0" expanded="false" />
-            <element signature="e#10236#13583#0" expanded="false" />
-            <element signature="e#14161#14476#0" expanded="false" />
-            <element signature="e#14514#14715#0" expanded="false" />
-            <element signature="e#14753#15078#0" expanded="false" />
-            <element signature="e#15117#15334#0" expanded="false" />
-            <element signature="e#15370#15483#0" expanded="false" />
-            <element signature="e#16390#17881#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/packages/log_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/pymysql/connections.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25745">
@@ -832,13 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sevice_start.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="39" column="24" lean-forward="true" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/get_hist_info.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-720">
@@ -878,57 +820,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1166">
-          <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_info_obj.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1060">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_tree_obj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#61#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="183" column="40" lean-forward="false" selection-start-line="183" selection-start-column="40" selection-end-line="183" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#65#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -960,14 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/collect_info_to_mq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="25" column="46" lean-forward="false" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/master_server/packages/log_module.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -993,41 +881,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/maintain_programs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1991">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#81#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/maintain_tables.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#65#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/table_obj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#62#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda/envs/Rcrontab_v2/lib/python3.6/site-packages/mongoengine/queryset/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4769">
           <caret line="275" column="0" lean-forward="false" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,8 +898,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/restart_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" column="20" lean-forward="true" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+        <state relative-caret-position="627">
+          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1062,7 +919,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/master_server/packages/quality_control_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1297">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -1074,41 +931,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/get_cal_info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
+        <state relative-caret-position="2489">
           <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_Info_obj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_obj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="175" column="32" lean-forward="false" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="83" lean-forward="false" selection-start-line="9" selection-start-column="77" selection-end-line="9" selection-end-column="83" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/check_tools/tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
+        <state relative-caret-position="3287">
           <caret line="534" column="34" lean-forward="true" selection-start-line="534" selection-start-column="34" selection-end-line="534" selection-end-column="34" />
           <folding>
             <element signature="e#863#1867#0" expanded="false" />
@@ -1133,6 +964,144 @@
         <state relative-caret-position="361">
           <caret line="20" column="49" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="49" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/collect_info_to_mq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/table_tree_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="76" column="8" lean-forward="false" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/table_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_tree_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/packages/event_product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cal_obj_lib/cal_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="769">
+          <caret line="221" column="20" lean-forward="false" selection-start-line="221" selection-start-column="20" selection-end-line="221" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/packages/mysql_sync_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="31" column="46" lean-forward="false" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/schedulers/schedulers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-651">
+          <caret line="121" column="23" lean-forward="true" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1541389604953" expanded="true" signature="3318:3376" ph="UPDATE py_script_tables_info set... " />
+            <marker date="1541389604953" expanded="true" signature="3412:3632" ph="update py_script_tables_info a LE... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/maintain_programs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="807">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="96" column="7" lean-forward="true" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_Info_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-637">
+          <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sevice_start.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/table_obj_lib/maintain_tables.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="15" lean-forward="true" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/cron_obj_lib/cron_obj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="178" column="21" lean-forward="false" selection-start-line="178" selection-start-column="21" selection-end-line="178" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master_server/mysqlsyncAPI/mysql_sync.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

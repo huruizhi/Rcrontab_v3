@@ -28,7 +28,8 @@ class MysqlSyncLog:
             tid = table[0].pk
         mr.info(tid)
 
-        version = self._get_version(table, db_name)
+        version = datetime.now()
+        version = version.strftime('%Y-%m-%d')
         event_info = {'tid': tid, 'type': 101,
                       'info': 'table QC_success',
                       'occur_datetime': occur_datetime,

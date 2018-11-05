@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 from master_server.packages.slave_exec_api import slave_exec_api
 from master_server.models import TablesInfo
-from master_server.packages.event_product import EventProduct
+from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
 
 
 class CalObj:
@@ -149,13 +149,13 @@ class CalObj:
                 self.running_start_event(hash_id)
             elif cal_tree_status == 1 and status in (2, 3):
                 self.running_end_event(status=status, hash_id=hash_id)
-                self._broadcast_result(body)
+                self._broadcast_result()
             elif cal_tree_status == 0 and status == 4:
-                self._broadcast_result(body)
+                self._broadcast_result()
                 self.unusual_end(status=status, hash_id=hash_id)
             elif cal_tree_status == 1 and status == 5:
                 self.unusual_end(status=status, hash_id=hash_id)
-                self._broadcast_result(body)
+                self._broadcast_result()
         except Exception as e:
             cal_log.error("{name}:{err}".format(name=__name__, err=str(e)))
         finally:
@@ -216,8 +216,9 @@ class CalObj:
         self.cal_tree_obj.running_miss_start(event_hash_id=hash_id)
         self._create_new_tree_obj()
 
-    def _broadcast_result(self, body):
-        event_product = EventProduct('result_event')
-        event_product.broadcast_message(message=body)
+    def _broadcast_result(self):
+        result_tables = self.cal_info_obj.info_dict['result_tables']
+        for tid in result_tables:
+            mysql_sync_func(tid)
 
 
