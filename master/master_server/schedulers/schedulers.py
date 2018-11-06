@@ -6,11 +6,14 @@ from master_server.collect_info_to_mq import SendProgramStatus
 from apscheduler.executors.pool import ThreadPoolExecutor
 from master_server.packages.hash import get_hash
 from datetime import datetime, timedelta
-from time import sleep
+from master_server.mongo_models import EventsHub
 from master_server.models import TablesInfo
 from django.db import connection
 from master_server.packages.log_module import scheduler_log
 from master_server.packages.quality_control_new import QualityControl
+from master_server.packages.mysql_check import connection_usable
+from master_server.packages.event_product import EventProduct
+import json
 
 '''
     hash_id = mn.StringField(max_length=16, required=True, Unique=True)
@@ -24,15 +27,17 @@ from master_server.packages.quality_control_new import QualityControl
 '''
 
 
-def _get_url(sid):
-    # 设置五分钟为超时时间
-    date_time = datetime.now() + timedelta(minutes=10)
-    hash_id = "{sid}_start".format(sid=sid)
-    Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='start', sid=sid)
+def _set_deadline_scheduler(sid):
+    version = datetime.now()
+    begin_time_out = (version + timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
+    cal_tree_hash_start = '{0}_start'.format(sid)
+    Scheduler.add_job_deadline(cron_tree_hash=cal_tree_hash_start, date_time=begin_time_out, status='start',
+                               sid=sid)
 
-    date_time = datetime.now() + timedelta(hours=3)
-    hash_id = "{sid}_end".format(sid=sid)
-    Scheduler.add_job_deadline(cron_tree_hash=hash_id, date_time=date_time, status='end', sid=sid)
+    cal_tree_hash_end = '{0}_end'.format(sid)
+    end_time_out = (version + timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
+    Scheduler.add_job_deadline(cron_tree_hash=cal_tree_hash_end, date_time=end_time_out, status='end',
+                               sid=sid)
 
 
 # 超时事件发送
@@ -48,24 +53,25 @@ def send_program_status(sid, status, subversion=None):
             subversion = occur_datetime
         msg_type = 5
         info = '{sid}: Not end status in Mysql database!'.format(sid=sid)
-        info_dict = {'sid': sid, 'type': msg_type, 'info': info,
+        info_dict = {'sid': int(sid), 'type': msg_type, 'info': info,
                      'occur_datetime': occur_datetime, 'subversion': subversion, 'source': 'apscheduler'}
     else:
         return
+
     hash_id = get_hash(info_dict)
     info_dict['hash_id'] = hash_id
-    sent_status = SendProgramStatus(message=info_dict, msg_type='p')
-    for i in range(10):
-        result = sent_status.send_msg()
-        if result:
-            break
-        sleep(20)
+    event_product = EventProduct()
+    event = EventsHub(**info_dict)
+    event.save()
+    message = json.dumps(info_dict)
+    scheduler_log.info(message)
+    event_product.broadcast_message(message=message)
+    event_product.close()
 
 
 # 人工输入表插入table_events exchange
 def manual_update_table_events():
-    if not is_connection_usable():
-        connection.close()
+    connection_usable()
 
     # 刷新表
     update_table_data_source()
@@ -108,16 +114,6 @@ def update_table_data_source():
     cursor.execute(sql2)
 
 
-# 数据库连接检查
-def is_connection_usable():
-    try:
-        connection.connection.ping()
-    except Exception as e:
-        return False
-    else:
-        return True
-
-
 class _Scheduler:
     def __init__(self):
         jobstores = {
@@ -143,9 +139,11 @@ class _Scheduler:
             minute, hour, day, month, day_of_week = cron_str.split()
             if day_of_week == '7' or day_of_week == '07':
                 day_of_week = '0'
-            self._scheduler.add_job(_get_url, 'cron', minute=minute,
+            self._scheduler.add_job(_set_deadline_scheduler, 'cron', minute=minute,
                                     hour=hour, day=day, month=month, day_of_week=day_of_week,
-                                    id=str(sid), name=str(sid), args=[sid, ], replace_existing=True, misfire_grace_time=300)
+                                    id=str(sid), name=str(sid), args=[sid, ], replace_existing=True,
+                                    misfire_grace_time=300)
+
         except Exception as e:
             print(__name__ + ":" + str(sid))
             print(e)

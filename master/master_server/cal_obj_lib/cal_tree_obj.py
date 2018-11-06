@@ -171,7 +171,7 @@ class CalTreeObj:
     # 设置deadline
     def set_deadline_scheduler(self):
         version = datetime.now()
-        begin_time_out = (version + timedelta(minutes=5)).strftime('%Y-%m-%d %H:%M:%S')
+        begin_time_out = (version + timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
         cal_tree_hash_start = '{0}_start'.format(self.sid)
         Scheduler.add_job_deadline(cron_tree_hash=cal_tree_hash_start, date_time=begin_time_out, status='start',
                                    sid=self.sid)

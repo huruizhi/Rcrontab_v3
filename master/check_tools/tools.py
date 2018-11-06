@@ -567,28 +567,28 @@ if __name__ == "__main__":
     获取树结构
     """
     # get_cron_tree(312, 3)
-    # get_cal_tree(757, 10)
+    # get_cal_tree(668, 10)
     # get_cal_tree(671, 10)
 
 
     """
     获取依赖关系
     """
-    # a = GetParentSon(217)
+    # a = GetParentSon(497)
     # a = GetParentSon(651)
 
     """
     表结果更新
     """
-    tid = [317, 312]
-    for t in tid:
-        table_success(t)
+    # tid = [335]
+    # for t in tid:
+    #     table_success(t)
 
     """
     重新调用程序
     """
 
-    # for i in [401]:
+    # for i in [497]:
     #     a = slave_exec_api(i, date_today)
     #     print(a)
 

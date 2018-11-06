@@ -21,9 +21,9 @@ class SendProgramStatus:
     def send_msg(self):
         if not self.msg_type:
             return
-        while True:
+        data = json.dumps(self.msg)
+        for i in range(10):
             try:
-                data = json.dumps(self.msg)
                 if self.msg_type == 'p':
                     event_product = EventProduct()
                 else:
@@ -33,9 +33,9 @@ class SendProgramStatus:
                 event_product.broadcast_message(data)
                 event_product.close()
                 return True
-            except Exception as e:
+            except Exception:
                 sleep(10)
-                mq_err.error(traceback.format_exc())
+                mq_err.error("{message}\n{err}".format(message=data, err=traceback.format_exc()))
 
 
 if __name__ == '__main__':

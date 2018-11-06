@@ -1,13 +1,11 @@
-from master_server.models import ResultLog
 from master_server.mongo_models import EventsHub
-from datetime import datetime
 from master_server.packages.hash import get_hash
 import json
 from master_server.packages.event_product import EventProduct
+from master_server.packages.log_module import result_reader, mq_err
+import traceback
 from time import sleep
-from django.db.models import Max
-from master_server.packages.log_module import result_reader
-from master_server.packages.mysql_check import connection_usable
+
 
 
 """
@@ -23,22 +21,23 @@ class SlaveResultLog:
         self.event_info = json.loads(event_info)
 
     def input_msg(self):
-        try:
-            event_product = EventProduct()
-            hash_id = get_hash(self.event_info)
-            self.event_info['hash_id'] = hash_id
-            event = EventsHub(**self.event_info)
-            event.save()
+        hash_id = get_hash(self.event_info)
+        self.event_info['hash_id'] = hash_id
+        event_info_message = self.event_info
+        if 'source' in event_info_message:
+            del event_info_message['source']
+        message = json.dumps(event_info_message)
+        for i in range(10):
+            try:
+                event_product = EventProduct()
+                result_reader.info(message)
+                event_product.broadcast_message(message=message)
 
-            if 'source' in self.event_info:
-                del self.event_info['source']
+                event_product.close()
+                break
+            except Exception:
+                sleep(10)
+                mq_err.error("{message}\n{err}".format(message=message, err=traceback.format_exc()))
 
-            event_info_message = self.event_info
-            message = json.dumps(event_info_message)
-            result_reader.info(message)
-            event_product.broadcast_message(message=message)
-
-            event_product.close()
-        except Exception as e:
-            print(str(__name__) + ".LoopReadResultLog._read_log:\n")
-            print(e)
+        event = EventsHub(**self.event_info)
+        event.save()

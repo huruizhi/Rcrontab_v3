@@ -14,6 +14,7 @@ from master_server.packages.log_module import result_reader
 from check_tools.get_cal_info import GetCalInfo
 from check_tools.tools import slave_exec_api
 from datetime import datetime
+from threading import Thread
 
 # Create your views here.
 
@@ -125,12 +126,10 @@ class SlaveProgramResult(View):
         result_reader.info('=====debug=====')
         result_reader.info(msg)
         result_reader.info('===============')
-        try:
-            slave_msg = SlaveResultLog(msg)
-            slave_msg.input_msg()
-            return HttpResponse("OK")
-        except Exception as e:
-            return HttpResponse("Error")
+        slave_msg = SlaveResultLog(msg)
+        t = Thread(target=slave_msg.input_msg)
+        t.start()
+        return HttpResponse("OK")
 
 
 class SyncResult(View):

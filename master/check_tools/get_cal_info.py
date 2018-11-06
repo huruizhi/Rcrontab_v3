@@ -120,7 +120,8 @@ class GetCalInfo:
             data = json.dumps(data)
             if db_server != 'db_153':
                 try:
-                    MysqlSyncLog(data)
+                    print(data)
+                    # MysqlSyncLog(data)
                     print("success! {data}".format(data=data))
                 except Exception as e:
                     print("failed! {data} {err}".format(data=data, err=e))

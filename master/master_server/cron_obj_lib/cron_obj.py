@@ -8,6 +8,7 @@ import json
 from threading import Thread
 from time import sleep
 from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
+from master_server.packages.mysql_check import connection_usable
 
 
 class CronObj:
@@ -174,9 +175,10 @@ class CronObj:
         del self.cron_tree_obj
 
     def _broadcast_result(self):
+        connection_usable()
         result_tables = TablesInfo.objects.filter(father_program__sid=self.sid)
-        for tid in result_tables:
-            thread = Thread(target=mysql_sync_func, args=(tid.pk,))
+        for table_obj in result_tables:
+            thread = Thread(target=mysql_sync_func, args=(table_obj,))
             thread.start()
 
 

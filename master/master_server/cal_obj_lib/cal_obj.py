@@ -218,9 +218,10 @@ class CalObj:
         self._create_new_tree_obj()
 
     def _broadcast_result(self):
+        connection_usable()
         result_tables = TablesInfo.objects.filter(father_program__sid=self.sid)
-        for tid in result_tables:
-            thread = Thread(target=mysql_sync_func, args=(tid.pk,))
+        for table_obj in result_tables:
+            thread = Thread(target=mysql_sync_func, args=(table_obj,))
             thread.start()
 
 

@@ -10,6 +10,8 @@ class WriteLogManage:
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         self.logger = logging.getLogger(name)
         handler = logging.FileHandler(file_name)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
         self.logger.addHandler(handler)
 
     def info(self, msg):
