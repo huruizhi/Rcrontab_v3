@@ -469,7 +469,7 @@ def flush_program(start_hour, end_hour, version=None):
                 finally:
                     if status:
                         break
-            sleep(5)
+            sleep(10)
 
 
 def send_program_ok(sid, version=None):
@@ -588,10 +588,9 @@ if __name__ == "__main__":
     重新调用程序
     """
 
-    # for i in [497]:
-    #     a = slave_exec_api(i, date_today)
-    #     print(a)
-
+    for i in [479]:
+        a = slave_exec_api(i, date_today)
+        print(a)
 
     # a = slave_exec_api(324, 'http://192.168.0.157:3555/macro_v2/bondManagerController/usdCnyIndexDay?version=2018-05-25&sid=324')
     # print(a)
