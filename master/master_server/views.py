@@ -1,6 +1,10 @@
 from django.shortcuts import HttpResponse, render
 from django.views import View
 import json
+<<<<<<< HEAD
+=======
+from master_server.schedulers.schedulers import Scheduler
+>>>>>>> rewrit_table_module
 from sevice_start import ThreadManage
 from master_server.packages.read_program_base_info import ReadProgramsInfo
 from . import forms
@@ -13,6 +17,7 @@ from master_server.packages.log_module import result_reader
 from check_tools.get_cal_info import GetCalInfo
 from check_tools.tools import slave_exec_api
 from datetime import datetime
+from threading import Thread
 
 # Create your views here.
 Scheduler = ThreadManage.Scheduler
@@ -23,11 +28,7 @@ class CheckStatus(View):
     检查程序状态
     """
     def get(self, request, info_type):
-        if info_type == "send_mail":
-            check_mail = ThreadManage.check_mail()
-            check_mail_str = '<br>'.join(check_mail)
-            return HttpResponse(check_mail_str)
-        elif info_type == "threads":
+        if info_type == "threads":
             resp = ThreadManage.check()
             return HttpResponse(resp, content_type="application/json")
 
@@ -102,7 +103,11 @@ class SendExecPlan(View):
     """
     def get(self, request):
         try:
+<<<<<<< HEAD
             ThreadManage.MaintainProgram.send_exec_plan()
+=======
+            ThreadManage.maintain_cron.send_exec_plan()
+>>>>>>> rewrit_table_module
             page = 'send exec plan ok!'
         except Exception as e:
             page = str(e)
@@ -129,12 +134,10 @@ class SlaveProgramResult(View):
         result_reader.info('=====debug=====')
         result_reader.info(msg)
         result_reader.info('===============')
-        try:
-            slave_msg = SlaveResultLog(msg)
-            slave_msg.input_msg()
-            return HttpResponse("OK")
-        except Exception as e:
-            return HttpResponse("Error")
+        slave_msg = SlaveResultLog(msg)
+        t = Thread(target=slave_msg.input_msg)
+        t.start()
+        return HttpResponse("OK")
 
 
 class SyncResult(View):

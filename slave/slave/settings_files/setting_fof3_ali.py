@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'slave_server',
+    'mysql_sync_log',
     'program_result_log',
 ]
 
@@ -85,9 +86,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'py_sync',
         'USER': 'pycf',
-        'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.156',
-        'PORT': '3313',
+        'PASSWORD': '1qaz_2wsx',
+        'HOST': '192.168.0.167',
+        'PORT': '3316',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
     },
     'result_log': {
@@ -95,8 +96,8 @@ DATABASES = {
         'NAME': 'py_crontab',
         'USER': 'pycf',
         'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.156',
-        'PORT': '3313',
+        'HOST': '192.168.0.167',
+        'PORT': '3316',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
     },
 }
@@ -126,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -150,7 +150,7 @@ STATIC_URL = '/static/'
 STATIC_VARIABLE = {
     'MASTER_IP': '192.168.0.157',
     'MASTER_PORT': 3851,
-    'DB_SERVER': 'db_weiwai_taiyuan_inner'
+    'DB_SERVER': 'db_fof_v3_pro'
 }
 
 # 是否是远程slave 远程slave 需要读取数据库同步文件

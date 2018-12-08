@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'slave_server',
+    'mysql_sync_log',
     'program_result_log',
 ]
 
@@ -86,8 +87,8 @@ DATABASES = {
         'NAME': 'py_sync',
         'USER': 'pycf',
         'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.156',
-        'PORT': '3313',
+        'HOST': '47.99.154.245',
+        'PORT': '3315',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
     },
     'result_log': {
@@ -95,8 +96,8 @@ DATABASES = {
         'NAME': 'py_crontab',
         'USER': 'pycf',
         'PASSWORD': '1qaz@WSXabc',
-        'HOST': '192.168.0.156',
-        'PORT': '3313',
+        'HOST': '47.99.154.245',
+        'PORT': '3315',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
     },
 }
@@ -150,7 +151,7 @@ STATIC_URL = '/static/'
 STATIC_VARIABLE = {
     'MASTER_IP': '192.168.0.157',
     'MASTER_PORT': 3851,
-    'DB_SERVER': 'db_weiwai_taiyuan_inner'
+    'DB_SERVER': 'db_private_fof_pro'
 }
 
 # 是否是远程slave 远程slave 需要读取数据库同步文件

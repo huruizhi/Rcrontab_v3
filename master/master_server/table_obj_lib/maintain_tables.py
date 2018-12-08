@@ -1,12 +1,12 @@
 from master_server.packages.receive import ReceiveRabbitMQMessage
 from master_server.packages.log_module import write_log
 from master_server.models import PyScriptBaseInfoV2, TablesInfo
-from master_server.table_obj_lib.table_obj import TableObj
 import json
 from master_server.packages.log_module import tables_listener
 from datetime import datetime
 from django.db import connection
-from time import sleep
+import traceback
+from master_server.packages.mysql_sync_result import MysqlSyncLog
 
 
 class MaintainTables:
@@ -28,33 +28,38 @@ class MaintainTables:
             if 'sid' in log_dict and log_dict['type'] in (2, 3, 4, 5):
                 if not is_connection_usable():
                     connection.close()
-                event_hash_id = log_dict['hash_id']
-                sid = log_dict['sid']
-                if type(sid) != int:
-                    raise Exception
-                if 'version' in log_dict:
-                    version = log_dict['version']
-                else:
-                    version = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                program_obj = PyScriptBaseInfoV2.objects.get(sid=sid)
-                # program_type = program_obj.program_type
-                tables_obj = TablesInfo.objects.filter(father_program=program_obj)
-                tables_list = [table_obj.pk for table_obj in tables_obj]
-                tables_listener.info(json.dumps(tables_list))
-                for tid in tables_list:
-                    if tid not in self.tables_obj_dict:
-                        self.tables_obj_dict[tid] = TableObj(tid)
-                    self.tables_obj_dict[tid].update(sid, event_hash_id, version)
-        except Exception as e:
-            self.logging.error(str(e))
+
+
+        except Exception:
+            self.logging.error(traceback.format_exc())
         finally:
             ch.basic_ack(delivery_tag=method.delivery_tag)
+
+    @staticmethod
+    def mysql_sync_func(db_name, table_name, ):
+        occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        if not is_connection_usable():
+            connection.close()
+        tables = TablesInfo.objects.filter(table_name=table_name, db_name=db_name)
+        for table_info in tables:
+            db_server = table_info.db_server
+            db_name = table_info.db_name
+            table_name = table_info.table_name
+            data = {'db_server': db_server, 'table_name': table_name,
+                    'db_name': db_name, 'occur_datetime': occur_datetime}
+            data = json.dumps(data)
+            try:
+                MysqlSyncLog(data)
+                mysql_sync.info("success! {data}".format(data=data))
+            except Exception as e:
+                mysql_sync.error("failed! {data} {err}".format(data=data, err=e))
 
 
 def is_connection_usable():
     try:
         connection.connection.ping()
-    except Exception as e:
+    except Exception:
+        write_log.error(traceback.format_exc())
         return False
     else:
         return True

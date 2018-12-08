@@ -10,6 +10,8 @@ class WriteLogManage:
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         self.logger = logging.getLogger(name)
         handler = logging.FileHandler(file_name)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
         self.logger.addHandler(handler)
 
     def info(self, msg):
@@ -40,4 +42,6 @@ mysql_sync = WriteLogManage('mysql_sync_api')
 mysql_sync_result_reader = WriteLogManage('mysql_sync_result_reader')
 scheduler_log = WriteLogManage('scheduler_log')
 quality_control = WriteLogManage('quality_control')
+mq_err = WriteLogManage('mq_err')
+
 

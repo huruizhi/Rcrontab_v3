@@ -6,8 +6,9 @@ class ReceiveRabbitMQMessage:
         if exchange is None:
             exchange = 'events'
         name = str(name)
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.157',
-                                                                       heartbeat_interval=60,))
+        credentials = pika.PlainCredentials('admin', 'admin')
+        parameters = pika.ConnectionParameters('192.168.155', 5672, credentials=credentials, heartbeat_interval=60, )
+        connection = pika.BlockingConnection(parameters)
         self.channel = connection.channel()
         self.channel.exchange_declare(exchange=exchange, exchange_type='fanout')
         result = self.channel.queue_declare(queue=name)
