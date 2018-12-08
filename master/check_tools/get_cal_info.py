@@ -2,6 +2,7 @@
 
 import os
 import django
+from check_tools.tools import find_program_from_res
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "master.settings")
 django.setup()
@@ -11,6 +12,7 @@ from master_server.mongo_models import EventsHub, CalProgramInfo, CalVersionTree
 from master_server.models import TablesInfo, PyScriptBaseInfoV2, ServerInfo
 import json
 from datetime import datetime
+from master_server.packages.mysql_sync_result import MysqlSyncLog
 
 
 class GetCalInfo:
@@ -97,17 +99,32 @@ class GetCalInfo:
         if isinstance(p_v_info, str):
             return True
         pre_tables = p_v_info['pre_tables']
-        for tid in pre_tables:
-            if not pre_tables[tid]:
-                table_obj = TablesInfo.objects.get(pk=tid)
-                if table_obj.db_name in ('py_etl', 'py_fund_2_1', 'py_bond_2_1', 'py_stock_2_1', 'py_daziguan_2_1'):
-                    if tid not in self.table_list:
-                        self.table_list.append(tid)
+        if self.server_pk not in (0, 1):
+            for tid in pre_tables:
+                if not pre_tables[tid]:
+                    table_obj = TablesInfo.objects.get(pk=tid)
+                    if table_obj.db_name in ('py_etl', 'py_fund_2_1', 'py_bond_2_1', 'py_stock_2_1', 'py_daziguan_2_1'):
+                        if tid not in self.table_list:
+                            self.table_list.append(tid)
+                    else:
+                        program_type = find_program_from_res([tid,])
+                        if program_type == 0 and tid not in self.table_list:
+                            self.table_list.append(tid)
+
+        elif self.server_pk == 1:
+            for tid in pre_tables:
+                if not pre_tables[tid]:
+                    table_obj = TablesInfo.objects.get(pk=tid)
+                    program_obj = PyScriptBaseInfoV2.objects.filter(result_tables=table_obj).filter(program_type=0)
+                    if program_obj:
+                        if tid not in self.table_list:
+                            self.table_list.append(tid)
 
     def _table_success(self):
         for tid in self.table_list:
             occur_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             table_info = TablesInfo.objects.get(pk=tid)
+            print(tid)
             db_server = table_info.db_server
             db_name = table_info.db_name
             table_name = table_info.table_name
@@ -115,16 +132,33 @@ class GetCalInfo:
             data = {'db_server': db_server, 'table_name': table_name,
                     'db_name': db_name, 'occur_datetime': occur_datetime}
             data = json.dumps(data)
-            if db_server != 'db_153':
+            if (db_server != 'db_153' and self.server_pk not in (0, 1)) or \
+                    ((db_server == 'db_153') and self.server_pk == 1):
                 try:
                     print(data)
-                    # MysqlSyncLog(data)
+                    MysqlSyncLog(data)
                     print("success! {data}".format(data=data))
                 except Exception as e:
                     print("failed! {data} {err}".format(data=data, err=e))
 
 
 if __name__ == '__main__':
-    g = GetCalInfo()
-    result_string = g()
+    g = GetCalInfo(1)
+    result_string = g(re_run=True)  # 查看
+    # result_string = g(re_run=True)  # 重跑
     print(result_string)
+    """
+ 0 计划任务 <br> 
+ 1 内网-抓取-基础算法 <br>
+ 2 阿里_RDS <br>
+ 5 阿里-fof_v2_hankou <br>
+ 6 阿里-private_fof_pro <br>
+ 7 阿里-fof_v2_nf <br>
+ 9 阿里_weiwai_taiyuan <br>
+ 11 阿里_mom <br>
+ 13 阿里_weiwai_taian <br>
+ 15 阿里-fof_v3 <br>
+ 
+ 
+ re_run=True
+    """

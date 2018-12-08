@@ -14,6 +14,7 @@ from master_server.packages.quality_control_new import QualityControl
 from master_server.packages.mysql_check import connection_usable
 from master_server.packages.event_product import EventProduct
 import json
+from time import sleep
 
 '''
     hash_id = mn.StringField(max_length=16, required=True, Unique=True)
@@ -60,10 +61,17 @@ def send_program_status(sid, status, subversion=None):
 
     hash_id = get_hash(info_dict)
     info_dict['hash_id'] = hash_id
-    event_product = EventProduct()
     event = EventsHub(**info_dict)
     event.save()
     message = json.dumps(info_dict)
+    while True:
+        try:
+            event_product = EventProduct()
+            event_product.broadcast_message(message=message)
+            event_product.close()
+            break
+        except Exception:
+            sleep(1)
     scheduler_log.info(message)
     event_product.broadcast_message(message=message)
     event_product.close()

@@ -22,7 +22,7 @@ class SendProgramStatus:
         if not self.msg_type:
             return
         data = json.dumps(self.msg)
-        for i in range(10):
+        while True:
             try:
                 if self.msg_type == 'p':
                     event_product = EventProduct()
@@ -34,7 +34,7 @@ class SendProgramStatus:
                 event_product.close()
                 return True
             except Exception:
-                sleep(10)
+                sleep(1)
                 mq_err.error("{message}\n{err}".format(message=data, err=traceback.format_exc()))
 
 

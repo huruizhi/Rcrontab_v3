@@ -23,6 +23,6 @@ class SendRstToMaster:
                 return True
             except Exception as e:
                 result_reader.info('{err}'.format(err=e))
-                sleep(30)
+                sleep(5)
 
 

@@ -12,6 +12,7 @@ from master_server.packages.slave_exec_api import slave_exec_api
 from master_server.models import TablesInfo
 from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
 import traceback
+from time import sleep
 
 
 class CalObj:
@@ -79,7 +80,7 @@ class CalObj:
                 mq = ReceiveRabbitMQMessage(name=name, target=self.table_callback, exchange='table_events')
                 mq.start()
             except Exception as e:
-                time.sleep(30)
+                time.sleep(1)
 
     def table_callback(self, ch, method, properties, body):
         try:
@@ -111,12 +112,15 @@ class CalObj:
         subversion = int(time.time()) * 1000
         version = version.split()[0]
         api = self.cal_info_obj.info_dict['api']
-        try:
-            self.cal_tree_obj.set_deadline_scheduler()
-            api, page = slave_exec_api(sid=self.sid, api=api, version=version, subversion=subversion)
-            cal_log.info("url:{url}\nresult:{page}".format(url=api, page=page))
-        except Exception as e:
-            cal_log.error("url:{url}\nerror:{err}".format(url=api, err=e))
+        for i in range(30):
+            try:
+                self.cal_tree_obj.set_deadline_scheduler()
+                api, page = slave_exec_api(sid=self.sid, api=api, version=version, subversion=subversion)
+                cal_log.info("url:{url}\nresult:{page}".format(url=api, page=page))
+                break
+            except Exception as e:
+                cal_log.error("url:{url}\nerror:{err}".format(url=api, err=e))
+                sleep(30)
 
     # 事件监听器
     def program_events_listener(self):
@@ -125,7 +129,7 @@ class CalObj:
                 mq = ReceiveRabbitMQMessage(name=str(self.sid), target=self.program_callback)
                 mq.start()
             except Exception as e:
-                time.sleep(30)
+                time.sleep(1)
 
     # 事件回调函数
     def program_callback(self, ch, method, properties, body):
@@ -200,12 +204,19 @@ class CalObj:
 
     # 创建新tree对象
     def _create_new_tree_obj(self):
-        pre_version = self.cal_tree_obj.info_dict['hash_id']
-        tables_obj = TablesInfo.objects.filter(son_program__pk=int(self.sid))
-        pre_tables = [t.pk for t in tables_obj]
-        del self.cal_tree_obj
-        self.cal_tree_obj = CalTreeObj(sid=self.sid, pre_tables=pre_tables, pre_version=pre_version)
-        self.cal_info_obj.change_pointer(pointer=self.cal_tree_obj.info_dict['hash_id'])
+        while True:
+            try:
+                pre_version = self.cal_tree_obj.info_dict['hash_id']
+                connection_usable()
+                tables_obj = TablesInfo.objects.filter(son_program__pk=int(self.sid))
+                pre_tables = [t.pk for t in tables_obj]
+                del self.cal_tree_obj
+                self.cal_tree_obj = CalTreeObj(sid=self.sid, pre_tables=pre_tables, pre_version=pre_version)
+                self.cal_info_obj.change_pointer(pointer=self.cal_tree_obj.info_dict['hash_id'])
+                break
+            except Exception as e:
+                cal_log.error("{name}:{sid}:{err}".format(name=__name__, sid=self.sid, err=traceback.format_exc()))
+                sleep(20)
 
     # 程序没有结束
     def miss_end(self, hash_id):
@@ -223,5 +234,3 @@ class CalObj:
         for table_obj in result_tables:
             thread = Thread(target=mysql_sync_func, args=(table_obj,))
             thread.start()
-
-

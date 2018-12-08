@@ -27,7 +27,7 @@ class SlaveResultLog:
         if 'source' in event_info_message:
             del event_info_message['source']
         message = json.dumps(event_info_message)
-        for i in range(10):
+        while True:
             try:
                 event_product = EventProduct()
                 result_reader.info(message)
@@ -36,7 +36,7 @@ class SlaveResultLog:
                 event_product.close()
                 break
             except Exception:
-                sleep(10)
+                sleep(1)
                 mq_err.error("{message}\n{err}".format(message=message, err=traceback.format_exc()))
 
         event = EventsHub(**self.event_info)
