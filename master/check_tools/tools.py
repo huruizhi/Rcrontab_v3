@@ -9,7 +9,7 @@ from urllib import request, parse
 from django.db import connection
 
 from master_server.mongo_models import EventsHub, TableVersionTree, TableInfo, CalProgramInfo, CalVersionTree
-from master_server.packages.mysql_check import connection_usable
+
 from master_server.packages.hash import get_hash
 from master_server.collect_info_to_mq import SendProgramStatus
 from master_server.packages.log_module import mysql_sync_result_reader as mr
@@ -20,7 +20,6 @@ import json
 from master_server.packages.event_product import EventProduct
 from time import sleep
 from master_server.packages.mysql_sync_result import MysqlSyncLog
-import traceback
 
 
 class MysqlSync:
@@ -74,8 +73,7 @@ def find_program_from_res(table_list, table_name=False):
         print(str(i) + " " + t_153.db_server + "." + t_153.db_name + "." + t_153.table_name + ":")
         ss = PyScriptBaseInfoV2.objects.filter(result_tables=t_153)
         for s in ss:
-            print("{0} {1} {2} {3} {4}".format(s.sid, s.name, s.cron, s.owner, s.program_type))
-            return s.program_type
+            print("{0} {1} {2} {3}".format(s.sid, s.name, s.cron, s.owner))
 
 
 def slave_exec_api(sid, version, subversion=False):
@@ -88,10 +86,7 @@ def slave_exec_api(sid, version, subversion=False):
     #     subversion = int(time.time()) * 1000
     p = PyScriptBaseInfoV2.objects.get(sid=sid)
     api = '{0}{1}'.format(p.path.path, p.name)
-    if subversion is True:
-        subversion = int(time.time()) * 1000
-    else:
-        subversion = None
+    subversion = int(time.time()) * 1000
     parameter_str_1 = "?sid={sid}&version={version}&subversion={subversion}".format(sid=sid,
                                                                                     version=version,
                                                                                     subversion=subversion)
@@ -115,16 +110,18 @@ def slave_exec_api(sid, version, subversion=False):
         ip = server.ip
         port = server.port
         url = "http://{ip}:{port}/slave_server/exec_api/".format(ip=ip, port=port)
+        print(url)
     except Exception as e:
-        return False, traceback.format_exc()
+        url = 'Can not find server ip port!'
+        return url
     try:
         data = parse.urlencode(data).encode('utf-8')
         req = request.Request(url, data=data)
         page = request.urlopen(req).read()
         page = page.decode('utf-8')
-        return True, page
+        return page
     except Exception as e:
-        return False, traceback.format_exc()
+        return e
 
 
 def exec_sql():
@@ -149,11 +146,9 @@ def mysql_table(db_name):
     import pandas as pd
     import pymysql
     from sqlalchemy import create_engine
-
     mysql_cn1 = pymysql.connect(host='192.168.0.153', port=3306, user='pycf', passwd='1qaz@WSXabc')
-
-    engine = create_engine("mysql+pymysql://pycf:1qaz@WSXabc@192.168.0.153:3306/py_crontab?charset=utf8")
     mysql_cn2 = pymysql.connect(host='192.168.0.153', port=3306, user='pycf', passwd='1qaz@WSXabc')
+    engine = create_engine("mysql+pymysql://pycf:1qaz@WSXabc@192.168.0.153:3306/py_crontab?charset=utf8")
     # 这里一定要写成mysql+pymysql，不要写成mysql+mysqldb
 
     sql1 = '''SELECT
@@ -162,7 +157,7 @@ def mysql_table(db_name):
 FROM
 information_schema.TABLES
 WHERE
-table_schema LIKE "%_2_1%" or table_schema like "%py_product"'''.format(db_name=db_name)
+table_schema LIKE "%2_1%" or table_schema like "%_qc"'''.format(db_name=db_name)
 
     sql2 = '''insert into py_crontab.py_script_tables_info
 select 0,
@@ -451,7 +446,6 @@ def get_program_from_path():
 
 
 def flush_program(start_hour, end_hour, version=None):
-    connection_usable()
     programs = PyScriptBaseInfoV2.objects.filter(program_type=0)
     for p in programs:
         cron = p.cron
@@ -468,14 +462,14 @@ def flush_program(start_hour, end_hour, version=None):
                 try:
                     send_program_ok(p.pk, version)
                     # a = slave_exec_api(p.pk, version, True)
-                    # print(p.pk)
+                    # print(a)
                     status = True
                 except Exception as e:
                     status = False
                 finally:
                     if status:
                         break
-            sleep(90)
+            sleep(10)
 
 
 def send_program_ok(sid, version=None):
@@ -567,12 +561,12 @@ if __name__ == "__main__":
     # mysql_table('db_153')
     # flush_program(15, 15, date_today)
     # flush_program(0, 9, date_today)
-    # send_program_ok(446, '2018-11-29')
+    # send_program_ok(378, '2018-11-05')
 
     """
     获取树结构
     """
-    # get_cron_tree(401, 3)
+    # get_cron_tree(312, 3)
     # get_cal_tree(668, 10)
     # get_cal_tree(671, 10)
 
@@ -580,24 +574,24 @@ if __name__ == "__main__":
     """
     获取依赖关系
     """
-    # a = GetParentSon()
+    # a = GetParentSon(497)
     # a = GetParentSon(651)
-
 
     """
     表结果更新
     """
-    # tid = [15279]
+    # tid = [335]
     # for t in tid:
     #     table_success(t)
 
     """
     重新调用程序
     """
-    #
-    # for i in [698]:
-    #     a = slave_exec_api(i, date_today, subversion=True)
+
+    # for i in [497]:
+    #     a = slave_exec_api(i, date_today)
     #     print(a)
+
 
     # a = slave_exec_api(324, 'http://192.168.0.157:3555/macro_v2/bondManagerController/usdCnyIndexDay?version=2018-05-25&sid=324')
     # print(a)
@@ -606,7 +600,7 @@ if __name__ == "__main__":
     """
     根据结果找程序
     """
-    find_program_from_res([465,466,467])
+    # find_program_from_res([11577,])
     # a = ['py_bond_2_1.py_bond_product_abs_base_info_2_1',
     #      'py_etl.py_etl_bond_financial_issuer_financial_indicators_2_1',
     #      'py_etl.py_etl_bond_non_financial_issuer_financial_indicators_2_1', ]
@@ -657,8 +651,7 @@ if __name__ == "__main__":
     """ 
     查询程序的结果表
     """
-
-    # table = TablesInfo.objects.filter(son_program__sid=564)
+    # table = TablesInfo.objects.filter(son_program__sid=578)
     # for t in table:
     #    print(t)
     # t = m.TablesInfo.objects.filter(father_program__sid=510)

@@ -6,7 +6,7 @@ class EventProduct:
     def __init__(self, exchange='events'):
         while True:
             try:
-                credentials = pika.PlainCredentials('admin', 'admin')
+                credentials = pika.PlainCredentials('admin', '123456')
                 parameters = pika.ConnectionParameters('192.168.155', 5672, credentials=credentials, )
                 connection = pika.BlockingConnection(parameters)
                 self.channel = connection.channel()
@@ -28,7 +28,7 @@ class TableEventProduct:
     def __init__(self):
         while True:
             try:
-                credentials = pika.PlainCredentials('admin', 'admin')
+                credentials = pika.PlainCredentials('admin', '123456')
                 parameters = pika.ConnectionParameters('192.168.155', 5672, credentials=credentials, )
                 connection = pika.BlockingConnection(parameters)
                 self.channel = connection.channel()

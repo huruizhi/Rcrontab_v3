@@ -47,6 +47,7 @@ class LoopReadResultLog:
 
             result_logs = ResultLog.objects.filter(pk__gt=self.pk).filter(pk__lte=max_flag_pk)
             self.pk = max_flag_pk
+            event_product = EventProduct()
 
             for r in result_logs:
                 if r.subversion:
@@ -67,16 +68,10 @@ class LoopReadResultLog:
                                           'version': version, 'type': r.event_type, 'occur_datetime': occur_datetime}
                     message = json.dumps(event_info_message)
                     result_reader.info(message)
-                    while True:
-                        try:
-                            event_product = EventProduct()
-                            event_product.broadcast_message(message=message)
-                            event_product.close()
-                            break
-                        except Exception:
-                            sleep(1)
+                    event_product.broadcast_message(message=message)
                 else:
                     result_reader.error("{0} with out subversion".format(r.pk))
+            event_product.close()
         except Exception as e:
             print(str(__name__) + ".LoopReadResultLog._read_log:\n")
             print(e)

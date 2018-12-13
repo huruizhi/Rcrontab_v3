@@ -113,11 +113,11 @@ class Trance:
 
 
 if __name__ == '__main__':
-    s_db = 'db_fof_v2_hk_bank'  # 源数据库标识
-    s_server = '阿里-fof_v2_hankou'  # 服务器标志
-    d_db = 'db_fof_v3_pro'  # 目的数据库标识
-    d_server = '阿里-fof_v3'
-    d_network = ('192.168.0.156', 7061)
+    s_db = 'db_weiwai_ty_pro'  # 源数据库标识
+    s_server = '阿里_weiwai_taiyuan'  # 服务器标志
+    d_db = 'db_weiwai_taian_pro'  # 目的数据库标识
+    d_server = '阿里_weiwai_taian'
+    d_network = ('47.98.172.183', 6960)
 
     trance = Trance(s_db, d_db, s_server, d_server, d_network)
     trance.start()

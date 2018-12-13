@@ -3,9 +3,12 @@ from master_server.cal_obj_lib.cal_obj import CalObj
 import json
 from time import sleep
 import os
+import threading
 
 
 class MaintainCalProgram:
+    _instance_lock = threading.Lock()
+
     def __init__(self):
         self.cal_program_obj_dic = dict()
         self.tmp_file = os.path.dirname(os.path.abspath(__file__)) + '/.cal_info.tmp'
@@ -18,6 +21,13 @@ class MaintainCalProgram:
             self.cal_program_obj_dic[str(sid)] = CalObj(**self.programs_info[sid])
 
         self.write_to_tmp()
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(MaintainCalProgram, "_instance"):
+            with MaintainCalProgram._instance_lock:
+                if not hasattr(MaintainCalProgram, "_instance"):
+                    MaintainCalProgram._instance = object.__new__(cls)
+        return MaintainCalProgram._instance
 
     # 从mysql数据库读取 所有程序 计划任务信息
     @staticmethod

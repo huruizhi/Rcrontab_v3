@@ -119,7 +119,4 @@ class MaintainPrograms:
     def send_exec_plan(self):
         for _, cron in self.cron_program_obj_dic.items():
             cron.cron_info_obj.send_exec_plan()
-<<<<<<< HEAD
-=======
 
->>>>>>> rewrit_table_module

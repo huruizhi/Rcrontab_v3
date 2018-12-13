@@ -1,12 +1,10 @@
 from master_server.packages.hash import get_hash_ack
 from master_server.cron_obj_lib.cron_Info_obj import CronInfoObj
 from master_server.cron_obj_lib.cron_tree_obj import CronTreeObj
-from master_server.packages.receive import ReceiveRabbitMQMessage
 from master_server.packages.log_module import WriteLog
 from master_server.models import TablesInfo
 import json
 from threading import Thread
-from time import sleep
 from master_server.mysqlsyncAPI.mysql_sync import mysql_sync_func
 from master_server.packages.mysql_check import connection_usable
 
@@ -39,10 +37,6 @@ class CronObj:
         # 获取指针 更新到CronInfoObj对象
         self.cron_info_obj.change_pointer(pointer=self.cron_tree_obj.info_dict['hash_id'])
 
-        # 开启监听器
-        thread = Thread(target=self.events_listener)
-        thread.start()
-
     # 刷新CronObj 基础信息
     def refresh(self, sid, pre_tables, result_tables, cron, api, server_id):
         if sid == self.sid:
@@ -61,17 +55,8 @@ class CronObj:
                 self.server_id = server_id
                 self.cron_info_obj.server_change(self.server_id)
 
-    # 事件监听器
-    def events_listener(self):
-        while True:
-            try:
-                mq = ReceiveRabbitMQMessage(name=str(self.sid), target=self.callback)
-                mq.start()
-            except Exception as e:
-                sleep(1)
-
     # 事件回调函数
-    def callback(self, ch, method, properties, body):
+    def callback(self, body):
         logging = WriteLog(name="events_listener")
         try:
             log_str = body.decode('utf-8')
@@ -106,8 +91,6 @@ class CronObj:
                 self._broadcast_result()
         except Exception as e:
             logging("{name}:{err}".format(name=__name__, err=str(e)))
-        finally:
-            ch.basic_ack(delivery_tag=method.delivery_tag)
 
     #  异常退出
     def unusual_end(self, status, hash_id, subversion=None):
@@ -150,9 +133,7 @@ class CronObj:
 
     # 创建新tree对象
     def _create_new_tree_obj(self):
-        print(__name__ + ":")
         pre_version = self.cron_tree_obj.info_dict['hash_id']
-        print(pre_version)
         del self.cron_tree_obj
         self.cron_tree_obj = CronTreeObj(sid=self.sid, pre_version=pre_version)
         self.cron_info_obj.change_pointer(pointer=self.cron_tree_obj.info_dict['hash_id'])

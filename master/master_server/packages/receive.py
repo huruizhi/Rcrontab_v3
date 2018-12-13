@@ -6,7 +6,7 @@ class ReceiveRabbitMQMessage:
         if exchange is None:
             exchange = 'events'
         name = str(name)
-        credentials = pika.PlainCredentials('admin', 'admin')
+        credentials = pika.PlainCredentials('admin', '123456')
         parameters = pika.ConnectionParameters('192.168.155', 5672, credentials=credentials, heartbeat_interval=60, )
         connection = pika.BlockingConnection(parameters)
         self.channel = connection.channel()
@@ -23,3 +23,4 @@ class ReceiveRabbitMQMessage:
 
     def start(self):
         self.channel.start_consuming()
+

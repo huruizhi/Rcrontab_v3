@@ -2,7 +2,6 @@ from master_server import mongo_models as mm
 import paramiko
 from check_tools.tools import flush_program
 import datetime
-from time import sleep
 
 
 def _delete_mongo_data():
@@ -32,14 +31,13 @@ def restart_server():
 
 
 if __name__ == "__main__":
-    """
-    18点 - 19点之间 执行
-    """
     date_today = datetime.datetime.now()
     date_today = date_today.strftime('%Y-%m-%d')
-    restart_server()
-    sleep(120)
-    flush_program(10, 18, date_today)
+    # restart_server()
+    # flush_program(9, 23, date_today)
+    flush_program(0, 9, date_today)
+
+
 
 
 
