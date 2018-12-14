@@ -33,9 +33,9 @@ def restart_server():
 if __name__ == "__main__":
     date_today = datetime.datetime.now()
     date_today = date_today.strftime('%Y-%m-%d')
-    # restart_server()
-    # flush_program(9, 23, date_today)
-    flush_program(0, 9, date_today)
+    restart_server()
+    flush_program(10, 18, date_today)
+    # flush_program(0, 9, date_today)
 
 
 

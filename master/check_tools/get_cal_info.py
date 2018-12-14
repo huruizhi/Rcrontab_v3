@@ -121,13 +121,26 @@ class GetCalInfo:
             if db_server != 'db_153':
                 try:
                     print(data)
-                    # MysqlSyncLog(data)
+                    MysqlSyncLog(data)
                     print("success! {data}".format(data=data))
                 except Exception as e:
                     print("failed! {data} {err}".format(data=data, err=e))
 
 
 if __name__ == '__main__':
-    g = GetCalInfo(1)
+    g = GetCalInfo(19)
     result_string = g()
     print(result_string)
+"""
+ 0 计划任务 <br> 
+ 1 内网-抓取-基础算法 <br>
+ 2 阿里_RDS <br>
+ 5 阿里-fof_v2_hankou <br>
+ 6 阿里-private_fof_pro <br>
+ 7 阿里-fof_v2_nf <br>
+ 9 阿里_weiwai_taiyuan <br>
+ 11 阿里_mom 
+ 13 阿里_weiwai_taian 
+ 15 阿里-fof_v3_测试 
+ 19 阿里-fof_v3_正式 
+"""

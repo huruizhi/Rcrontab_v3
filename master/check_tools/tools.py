@@ -453,6 +453,8 @@ def flush_program(start_hour, end_hour, version=None):
             hour = int(cron.split()[1])
         except Exception as e:
             print("err" + str(p.pk) + cron)
+            send_program_ok(p.pk, version)
+            sleep(10)
             continue
         day = cron.split()[4]
         if day == '*' and start_hour <= hour <= end_hour:
@@ -469,7 +471,7 @@ def flush_program(start_hour, end_hour, version=None):
                 finally:
                     if status:
                         break
-            sleep(10)
+            sleep(5)
 
 
 def send_program_ok(sid, version=None):
@@ -558,7 +560,7 @@ if __name__ == "__main__":
     """
     刷新依赖关系
     """
-    # mysql_table('db_153')
+    mysql_table('db_153')
     # flush_program(15, 15, date_today)
     # flush_program(0, 9, date_today)
     # send_program_ok(378, '2018-11-05')
@@ -574,13 +576,13 @@ if __name__ == "__main__":
     """
     获取依赖关系
     """
-    # a = GetParentSon(497)
+    # a = GetParentSon(449)
     # a = GetParentSon(651)
 
     """
     表结果更新
     """
-    # tid = [335]
+    # tid = [16915]
     # for t in tid:
     #     table_success(t)
 
@@ -588,7 +590,7 @@ if __name__ == "__main__":
     重新调用程序
     """
 
-    # for i in [497]:
+    # for i in [1189]:
     #     a = slave_exec_api(i, date_today)
     #     print(a)
 
@@ -600,7 +602,7 @@ if __name__ == "__main__":
     """
     根据结果找程序
     """
-    # find_program_from_res([11577,])
+    # find_program_from_res([16915])
     # a = ['py_bond_2_1.py_bond_product_abs_base_info_2_1',
     #      'py_etl.py_etl_bond_financial_issuer_financial_indicators_2_1',
     #      'py_etl.py_etl_bond_non_financial_issuer_financial_indicators_2_1', ]
